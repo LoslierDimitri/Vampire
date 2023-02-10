@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="Vampire"
+run/main_scene="res://Main/Main.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/vsync/use_vsync=false
 
 [gui]
 
