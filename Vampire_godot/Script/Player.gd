@@ -1,46 +1,53 @@
 extends KinematicBody
 
-var speed = 10
-var h_acceleration = speed
-var air_acceleration = 1
-var normal_acceleration = speed
-var gravity = 50
-var jump = 30
+###########################################################################
+#node
+onready var head = get_node("Camera_pivot")
 
-var mouse_sensitivity = 0.05
+###########################################################################
+#parameter
+export var mouse_sensitivity = 0.05
 
+###########################################################################
+#movement
 var direction = Vector3()
-var h_velocity = Vector3()
 var movement = Vector3()
+
+var speed_actual = 0
+export var speed_walk = 10
+export var speed_run = 30
+export var gravity = 50
 var gravity_vec = Vector3()
+var snap = Vector3()
+export var jump = 30
 
-onready var head = $Camera_pivot
-
+###########################################################################
+#ready
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
 
+###########################################################################
+#input
 func _input(event):
+	###########################################################################
+	#input mouse
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
-		
-func _physics_process(delta):
-	direction = Vector3()
-	
-	if not is_on_floor():
-		gravity_vec += Vector3.DOWN * gravity * delta
-		h_acceleration = air_acceleration
-	else:
-		gravity_vec = -get_floor_normal()
-		h_acceleration = normal_acceleration
-	
-	var snap = true
+
+###########################################################################
+#input movement
+func input_movement():
+	###########################################################################
+	#jump
+	snap = Vector3.DOWN
 	if Input.is_action_just_pressed("space") and (is_on_floor()):
-		snap = false
+		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
 	
+	###########################################################################
+	#movement
 	if Input.is_action_pressed("z"):
 		direction -= transform.basis.z
 	elif Input.is_action_pressed("s"):
@@ -50,14 +57,38 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("d"):
 		direction += transform.basis.x
 	
+	###########################################################################
+	#run
+	speed_actual = speed_walk
+	if (Input.is_action_pressed("shift")):
+		speed_actual = speed_run
+
+###########################################################################
+#gravity
+func gravity(delta):
+	if (is_on_floor() == false):
+		gravity_vec += Vector3.DOWN * gravity * delta
+	else:
+		gravity_vec = -get_floor_normal()
+
+###########################################################################
+#physic process
+func _physics_process(delta):
+	direction = Vector3()
+	
+	###########################################################################
+	#movement
+	gravity(delta)
+	input_movement()
+	
 	direction = direction.normalized()
-	h_velocity = h_velocity.linear_interpolate(direction * speed, h_acceleration * delta)
-	movement.z = h_velocity.z + gravity_vec.z
-	movement.x = h_velocity.x + gravity_vec.x
+	movement.x = direction.x * speed_actual + gravity_vec.x
+	movement.z = direction.z * speed_actual + gravity_vec.z
 	movement.y = gravity_vec.y
 	
-#	move_and_slide(movement, Vector3.UP, true)
-	if (snap == true):
-		move_and_slide_with_snap(movement, Vector3.DOWN, Vector3.UP)
-	else:
-		move_and_slide_with_snap(movement, Vector3.ZERO, Vector3.UP)
+	move_and_slide_with_snap(movement, snap, Vector3.UP)
+
+###########################################################################
+#process
+func _process(delta):
+	pass
