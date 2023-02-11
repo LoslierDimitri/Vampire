@@ -5,8 +5,9 @@
 
 [sub_resource type="CapsuleShape" id=1]
 
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 1, 0.159166, 1 )
+[sub_resource type="CylinderShape" id=2]
+height = 1.0
+radius = 2.0
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -15,8 +16,8 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.599297, 0, 0, 0, 1, 0, 0, 0, 0.599297, 0, -1.32382, 0 )
+[node name="Collision_foot" type="CollisionShape" parent="."]
+transform = Transform( 0.599297, 0, 0, 0, 1, 0, 0, 0, 0.599297, 0, -1.06597, 0 )
 shape = SubResource( 2 )
 
 [node name="Camera_pivot" type="Spatial" parent="."]
