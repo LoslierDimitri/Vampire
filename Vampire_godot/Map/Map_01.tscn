@@ -34,3 +34,12 @@ transform = Transform( 7.75248, 0, 0, 0, 5.48184, -5.48184, 0, 5.48184, 5.48184,
 
 [node name="Cube_05" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
 transform = Transform( 7.75248, 0, 0, 0, 3.87624, -6.71386, 0, 6.71386, 3.87624, 49.5139, -2.90144, 3.00619 )
+
+[node name="Cube_06" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
+transform = Transform( 2.26779, 0, 0, 0, 2.26779, 0, 0, 0, 2.26779, 0, 5.74159, -9.26224 )
+
+[node name="Cube_07" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
+transform = Transform( 2.26779, 0, 0, 0, 2.26779, 0, 0, 0, 2.26779, 0, 7.69809, -15.7938 )
+
+[node name="Cube_08" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
+transform = Transform( 4.5747, 0, 0, 0, 4.5747, 0, 0, 0, 4.5747, 0, 9.63225, -28.0375 )

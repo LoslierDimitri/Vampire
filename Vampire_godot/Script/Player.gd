@@ -16,10 +16,16 @@ var movement = Vector3()
 var speed_actual = 0
 export var speed_walk = 10
 export var speed_run = 30
+
 export var gravity = 50
 var gravity_vec = Vector3()
 var snap = Vector3()
 export var jump = 30
+var stop_jump = false
+
+var is_climb_up = false
+var is_climb_down = false
+var is_climb = false
 
 ###########################################################################
 #ready
@@ -47,6 +53,11 @@ func input_movement():
 		gravity_vec = Vector3.UP * jump
 	
 	###########################################################################
+	#climb
+	if (Input.is_action_pressed("space")):
+		is_climb = true
+	
+	###########################################################################
 	#movement
 	if Input.is_action_pressed("z"):
 		direction -= transform.basis.z
@@ -67,6 +78,8 @@ func input_movement():
 #gravity
 func gravity(delta):
 	if (is_on_floor() == false):
+		if (stop_jump == true):
+			gravity_vec = Vector3()
 		gravity_vec += Vector3.DOWN * gravity * delta
 	else:
 		gravity_vec = -get_floor_normal()
@@ -86,9 +99,49 @@ func _physics_process(delta):
 	movement.z = direction.z * speed_actual + gravity_vec.z
 	movement.y = gravity_vec.y
 	
+	###########################################################################
+	#climb
+	if (is_climb_up == false and is_climb_down == true):
+		if (is_climb == true):
+			pass
+	
+	###########################################################################
+	#movement calcul
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	
+	reset()
 
 ###########################################################################
 #process
 func _process(delta):
+	pass
+
+###########################################################################
+#reset
+func reset():
+	stop_jump = false
+
+###########################################################################
+#top stop jump
+func _on_Area_top_body_entered(body):
+	stop_jump = true
+func _on_Area_top_body_exited(body):
+	pass
+
+###########################################################################
+#climb
+func _on_Area_climb_up_body_entered(body):
+	print(body)
+	is_climb_up = true
+func _on_Area_climb_up_body_exited(body):
+	is_climb_up = false
+
+func _on_Area_climb_down_body_entered(body):
+	is_climb_down = true
+func _on_Area_climb_down_body_exited(body):
+	is_climb_down = false
+
+###########################################################################
+#timer climb
+func _on_Timer_climb_timeout():
 	pass
