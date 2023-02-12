@@ -1,91 +1,66 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Environment/Map_01_01.tres" type="Environment" id=1]
 [ext_resource path="res://Script/Player.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape" id=1]
-height = 3.0
-
-[sub_resource type="CapsuleShape" id=4]
-
-[sub_resource type="CylinderShape" id=6]
-height = 1.96589
-
-[sub_resource type="CylinderShape" id=3]
-height = 0.5
-
-[sub_resource type="CylinderShape" id=5]
+[sub_resource type="CylinderShape" id=4]
 height = 0.5
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 1, 2.60806, 1 )
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 2.0
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 2 )
+
+[node name="Camera_pivot" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="Camera_pivot"]
+environment = ExtResource( 1 )
+current = true
+fov = 100.0
+far = 4096.0
+
+[node name="Player_stand" type="Spatial" parent="."]
+
+[node name="Position_camera_stand" type="Position3D" parent="Player_stand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="Area_stand_top" type="Area" parent="Player_stand"]
+
+[node name="Collision_stand_up" type="CollisionShape" parent="Player_stand/Area_stand_top"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+shape = SubResource( 4 )
+
+[node name="Area_climb_up" type="Area" parent="Player_stand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5 )
+
+[node name="Collision_climb_up" type="CollisionShape" parent="Player_stand/Area_climb_up"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Area_climb_down" type="Area" parent="Player_stand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1.5 )
+
+[node name="Collision_climb_down" type="CollisionShape" parent="Player_stand/Area_climb_down"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="Player_crouch" type="Spatial" parent="."]
+
+[node name="Position_camera_crouch" type="Position3D" parent="Player_crouch"]
+
+[node name="Player_slide" type="Spatial" parent="."]
+
+[node name="Position_camera_slide" type="Position3D" parent="Player_slide"]
 
 [node name="Collision_stand" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="Collision_crouch" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 0 )
-shape = SubResource( 4 )
 
-[node name="Area_crouch_top" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Area_crouch_top"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-shape = SubResource( 6 )
-
-[node name="Area_top" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.172504, 0 )
-
-[node name="Collision_top" type="CollisionShape" parent="Area_top"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4832, 0 )
-shape = SubResource( 3 )
-
-[node name="Area_down" type="Area" parent="."]
-
-[node name="Collision_down" type="CollisionShape" parent="Area_down"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38352, 0 )
-shape = SubResource( 5 )
-
-[node name="Camera_pivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-
-[node name="Camera" type="Camera" parent="Camera_pivot"]
-environment = ExtResource( 1 )
-fov = 110.0
-far = 5486.0
-
-[node name="Timer_climb" type="Timer" parent="."]
-
-[node name="Area_climb_up" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.34299 )
-
-[node name="Collision_climb_up" type="CollisionShape" parent="Area_climb_up"]
-transform = Transform( 0.463955, 0, 0, 0, 0.176376, 0, 0, 0, 0.176376, 0, 0.614475, 0 )
-shape = SubResource( 2 )
-
-[node name="Area_climb_down" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.34299 )
-
-[node name="Collision_climb_down" type="CollisionShape" parent="Area_climb_down"]
-transform = Transform( 0.463955, 0, 0, 0, 0.176376, 0, 0, 0, 0.176376, 0, -0.817864, 0 )
-shape = SubResource( 2 )
-
-[node name="Position_camera_stand" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-
-[node name="Position_camera_crouch" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-
-[connection signal="body_entered" from="Area_crouch_top" to="." method="_on_Area_crouch_top_body_entered"]
-[connection signal="body_exited" from="Area_crouch_top" to="." method="_on_Area_crouch_top_body_exited"]
-[connection signal="body_entered" from="Area_top" to="." method="_on_Area_top_body_entered"]
-[connection signal="body_exited" from="Area_top" to="." method="_on_Area_top_body_exited"]
-[connection signal="timeout" from="Timer_climb" to="." method="_on_Timer_climb_timeout"]
-[connection signal="body_entered" from="Area_climb_up" to="." method="_on_Area_climb_up_body_entered"]
-[connection signal="body_exited" from="Area_climb_up" to="." method="_on_Area_climb_up_body_exited"]
-[connection signal="body_entered" from="Area_climb_down" to="." method="_on_Area_climb_down_body_entered"]
-[connection signal="body_exited" from="Area_climb_down" to="." method="_on_Area_climb_down_body_exited"]
+[node name="Collision_slide" type="CollisionShape" parent="."]
