@@ -3,7 +3,10 @@ extends KinematicBody
 ###########################################################################
 #node
 onready var CAMERA_PIVOT = get_node("Camera_pivot")
-onready var COLLISION = get_node("Collision")
+onready var CAMERA_POSITION_UP = get_node("Position_camera_stand")
+onready var CAMERA_POSITION_DOWN = get_node("Position_camera_crouch")
+onready var COLLISION_STAND = get_node("Collision_stand")
+onready var COLLSION_CROUCH = get_node("Collision_crouch")
 onready var TIMER_CLIMB = get_node("Timer_climb")
 
 ###########################################################################
@@ -18,6 +21,7 @@ var movement = Vector3()
 var speed_actual = 0
 export var speed_walk = 10
 export var speed_run = 30
+export var speed_crouch = 5
 
 export var gravity = 50
 var gravity_vec = Vector3()
@@ -36,6 +40,9 @@ export var timer_climb_time_normal_value = 2
 export var timer_climb_time_fast = 0.5
 export var timer_climb_time_fast_value = 4
 
+var is_crouch = false
+var is_crouch_top = false
+
 ###########################################################################
 #ready
 func _ready():
@@ -49,6 +56,9 @@ func update_parameter():
 	timer_climb_time_value = timer_climb_time_normal_value
 #	TIMER_CLIMB.wait_time = timer_climb_time_fast
 #	timer_climb_time_value = timer_climb_time_fast_value
+	
+#	COLLISION_STAND.disabled = false
+	COLLSION_CROUCH.disabled = true
 
 ###########################################################################
 #input
@@ -91,6 +101,14 @@ func input_movement():
 	speed_actual = speed_walk
 	if (Input.is_action_pressed("shift")):
 		speed_actual = speed_run
+	if (is_crouch == true):
+		speed_actual = speed_crouch
+	
+	###########################################################################
+	#crouch
+	if (Input.is_action_just_pressed("c") and is_crouch_top == false):
+		is_crouch = not is_crouch
+		COLLISION_STAND.disabled = false
 
 ###########################################################################
 #gravity
@@ -123,7 +141,7 @@ func _physics_process(delta):
 		if (is_climb == true):
 			climb_direction = Vector3(direction.x * timer_climb_time_value, timer_climb_time_value, direction.z * timer_climb_time_value)
 			TIMER_CLIMB.start()
-			COLLISION.disabled = true
+			COLLISION_STAND.disabled = true
 			climb_timer = true
 	
 	###########################################################################
@@ -137,7 +155,14 @@ func _physics_process(delta):
 ###########################################################################
 #process
 func _process(delta):
-	pass
+	if (is_crouch == true):
+		COLLISION_STAND.disabled = true
+		COLLSION_CROUCH.disabled = false
+		CAMERA_PIVOT.global_transform.origin = CAMERA_POSITION_DOWN.global_transform.origin
+	else:
+#		COLLISION_STAND.disabled = false
+		COLLSION_CROUCH.disabled = true
+		CAMERA_PIVOT.global_transform.origin = CAMERA_POSITION_UP.global_transform.origin
 
 ###########################################################################
 #reset
@@ -167,4 +192,11 @@ func _on_Area_climb_down_body_exited(body):
 #timer climb
 func _on_Timer_climb_timeout():
 	climb_timer = false
-	COLLISION.disabled = false
+	COLLISION_STAND.disabled = false
+
+###########################################################################
+#crouch top verification
+func _on_Area_crouch_top_body_entered(body):
+	is_crouch_top = true
+func _on_Area_crouch_top_body_exited(body):
+	is_crouch_top = false
