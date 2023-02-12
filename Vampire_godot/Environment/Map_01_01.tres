@@ -2,4 +2,6 @@
 
 [resource]
 ambient_light_color = Color( 0.611765, 0.611765, 0.611765, 1 )
+fog_enabled = true
+fog_depth_end = 50.0
 ssao_enabled = true

@@ -2,7 +2,9 @@ extends KinematicBody
 
 ###########################################################################
 #node
-onready var head = get_node("Camera_pivot")
+onready var CAMERA_PIVOT = get_node("Camera_pivot")
+onready var COLLISION = get_node("Collision")
+onready var TIMER_CLIMB = get_node("Timer_climb")
 
 ###########################################################################
 #parameter
@@ -26,11 +28,27 @@ var stop_jump = false
 var is_climb_up = false
 var is_climb_down = false
 var is_climb = false
+var climb_direction = Vector3()
+var climb_timer = false
+var timer_climb_time_value = 0
+export var timer_climb_time_normal = 1
+export var timer_climb_time_normal_value = 2
+export var timer_climb_time_fast = 0.5
+export var timer_climb_time_fast_value = 4
 
 ###########################################################################
 #ready
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	update_parameter()
+
+###########################################################################
+#parameter change
+func update_parameter():
+	TIMER_CLIMB.wait_time = timer_climb_time_normal
+	timer_climb_time_value = timer_climb_time_normal_value
+#	TIMER_CLIMB.wait_time = timer_climb_time_fast
+#	timer_climb_time_value = timer_climb_time_fast_value
 
 ###########################################################################
 #input
@@ -39,8 +57,8 @@ func _input(event):
 	#input mouse
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
-		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
-		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
+		CAMERA_PIVOT.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
+		CAMERA_PIVOT.rotation.x = clamp(CAMERA_PIVOT.rotation.x, deg2rad(-89), deg2rad(89))
 
 ###########################################################################
 #input movement
@@ -101,12 +119,17 @@ func _physics_process(delta):
 	
 	###########################################################################
 	#climb
-	if (is_climb_up == false and is_climb_down == true):
+	if (is_climb_up == false and is_climb_down == true and Input.is_action_pressed("z") and climb_timer == false):
 		if (is_climb == true):
-			pass
+			climb_direction = Vector3(direction.x * timer_climb_time_value, timer_climb_time_value, direction.z * timer_climb_time_value)
+			TIMER_CLIMB.start()
+			COLLISION.disabled = true
+			climb_timer = true
 	
 	###########################################################################
 	#movement calcul
+	if (climb_timer == true):
+		movement = climb_direction
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
 	
 	reset()
@@ -131,7 +154,6 @@ func _on_Area_top_body_exited(body):
 ###########################################################################
 #climb
 func _on_Area_climb_up_body_entered(body):
-	print(body)
 	is_climb_up = true
 func _on_Area_climb_up_body_exited(body):
 	is_climb_up = false
@@ -144,4 +166,5 @@ func _on_Area_climb_down_body_exited(body):
 ###########################################################################
 #timer climb
 func _on_Timer_climb_timeout():
-	pass
+	climb_timer = false
+	COLLISION.disabled = false
