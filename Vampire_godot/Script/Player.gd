@@ -69,9 +69,7 @@ export var timer_slide_normal = 1
 export var timer_slide_long = 2
 
 ##########################################################################
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+func _ready():	
 	CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_STAND.global_transform.origin
 	
 	COLLISION_STAND.disabled = false

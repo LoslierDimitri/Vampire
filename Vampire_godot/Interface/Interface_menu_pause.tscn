@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Interface_menu_pause.gd" type="Script" id=1]
+
+[node name="Interface_menu_pause" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Button_continue" type="Button" parent="."]
+margin_left = 116.0
+margin_top = 25.0
+margin_right = 481.0
+margin_bottom = 161.0
+text = "CONTINUE"
+
+[node name="Button_save" type="Button" parent="."]
+margin_left = 108.0
+margin_top = 178.0
+margin_right = 364.0
+margin_bottom = 293.0
+text = "SAVE"
+
+[node name="Button_load" type="Button" parent="."]
+margin_left = 130.0
+margin_top = 324.0
+margin_right = 359.0
+margin_bottom = 430.0
+text = "LOAD"
+
+[node name="Button_exit" type="Button" parent="."]
+margin_left = 146.0
+margin_top = 460.0
+margin_right = 428.0
+margin_bottom = 574.0
+text = "EXIT"
+
+[connection signal="pressed" from="Button_continue" to="." method="_on_Button_continue_pressed"]
+[connection signal="pressed" from="Button_save" to="." method="_on_Button_save_pressed"]
+[connection signal="pressed" from="Button_load" to="." method="_on_Button_load_pressed"]
+[connection signal="pressed" from="Button_exit" to="." method="_on_Button_exit_pressed"]

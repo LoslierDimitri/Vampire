@@ -23,6 +23,7 @@ height = 0.5
 height = 0.5
 
 [node name="Player" type="KinematicBody"]
+pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="Camera_pivot" type="Spatial" parent="."]

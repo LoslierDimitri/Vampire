@@ -13,6 +13,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.98222, 8.92944, -10.2945 )
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="NavigationAgent"]
 
+[node name="DirectionalLight" type="DirectionalLight" parent="NavigationAgent/NavigationMeshInstance"]
+transform = Transform( 0.619889, 0.519479, -0.588115, 0, 0.749488, 0.662018, 0.78469, -0.410378, 0.464599, 0, 13.9756, 19.4036 )
+shadow_enabled = true
+
 [node name="Ground" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
 transform = Transform( 70.6758, 0, 0, 0, 0.310725, 0, 0, 0, 70.6758, 0, 0, 0 )
 
@@ -24,10 +28,6 @@ transform = Transform( 2.2539, 0, 0, 0, 1.59375, -1.59375, 0, 1.59375, 1.59375, 
 
 [node name="Cube_03" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
 transform = Transform( 2.2539, 0, 0, 0, 1.12695, -1.95194, 0, 1.95194, 1.12695, 13.5086, -0.590489, 0 )
-
-[node name="DirectionalLight" type="DirectionalLight" parent="NavigationAgent/NavigationMeshInstance"]
-transform = Transform( 0.619889, 0.519479, -0.588115, 0, 0.749488, 0.662019, 0.78469, -0.410378, 0.464599, 0, 13.9756, 19.4036 )
-shadow_enabled = true
 
 [node name="Cube_04" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
 transform = Transform( 7.75248, 0, 0, 0, 5.48184, -5.48184, 0, 5.48184, 5.48184, 26.9832, -0.520958, 3.00619 )
@@ -43,3 +43,6 @@ transform = Transform( 2.26779, 0, 0, 0, 2.26779, 0, 0, 0, 2.26779, 0, 7.69809, 
 
 [node name="Cube_08" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
 transform = Transform( 4.5747, 0, 0, 0, 4.5747, 0, 0, 0, 4.5747, 0, 9.63225, -28.0375 )
+
+[node name="Cube_09" parent="NavigationAgent/NavigationMeshInstance" instance=ExtResource( 2 )]
+transform = Transform( -18.876, 9.43801, 5.44903, 0, 10.8981, -18.876, -10.8981, -16.3471, -9.43799, -35.2497, -8.78732, 3.00619 )
