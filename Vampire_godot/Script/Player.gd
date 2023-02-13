@@ -14,6 +14,7 @@ onready var COLLISION_CROUCH = get_node("Collision_crouch")
 onready var COLLISION_SLIDE = get_node("Collision_slide")
 
 onready var TIMER_CLIMB = get_node("Player_stand/Timer_climb")
+onready var TIMER_SLIDE = get_node("Player_slide/Timer_slide")
 
 ##########################################################################
 #input variable
@@ -36,6 +37,7 @@ export var mouse_sensitivity = 0.05
 var direction = Vector3()
 var movement = Vector3()
 var climb_movement = Vector3()
+var slide_movement = Vector3()
 
 var gravity_vector = Vector3()
 var gravity = 30
@@ -59,6 +61,13 @@ export var timer_climb_normal_value = 2
 export var timer_climb_fast = 0.5
 export var timer_climb_fast_value = 4
 
+var is_crouch = false
+
+var is_slide = false
+var slide_timer = false
+export var timer_slide_normal = 1
+export var timer_slide_long = 2
+
 ##########################################################################
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -73,6 +82,9 @@ func _ready():
 #	timer_climb_value_actual = timer_climb_normal_value
 	TIMER_CLIMB.wait_time = timer_climb_fast
 	timer_climb_value_actual = timer_climb_fast_value
+	
+	TIMER_SLIDE.wait_time = timer_slide_normal
+#	TIMER_SLIDE.wait_time = timer_slide_long
 
 ##########################################################################
 func input():
@@ -116,9 +128,17 @@ func process_movement(delta):
 	if (input_d == true):
 		direction += transform.basis.x
 	
+	if (input_c_just == true):
+		is_crouch = not is_crouch
+	
 	speed_actual = speed_walk
 	if (input_shift == true and input_z == true):
 		speed_actual = speed_run
+	if (is_crouch == true):
+		speed_actual = speed_crouch
+	
+	if (is_crouch == true and input_z == true and input_shift == true):
+		is_crouch = false
 	
 	if (jump_stop == true):
 		gravity_vector = Vector3()
@@ -137,6 +157,23 @@ func process_movement(delta):
 	movement.z = direction.z * speed_actual + gravity_vector.z
 	movement.y = gravity_vector.y
 	
+	if (climb_timer == false):
+		if (is_crouch == true):
+			COLLISION_STAND.disabled = true
+			COLLISION_CROUCH.disabled = false
+			COLLISION_SLIDE.disabled = true
+			CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_CROUCH.global_transform.origin
+		elif (is_slide == true):
+			COLLISION_STAND.disabled = true
+			COLLISION_CROUCH.disabled = true
+			COLLISION_SLIDE.disabled = false
+			CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_SLIDE.global_transform.origin
+		else:
+			COLLISION_STAND.disabled = false
+			COLLISION_CROUCH.disabled = true
+			COLLISION_SLIDE.disabled = true
+			CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_STAND.global_transform.origin
+	
 	if (is_climb_up == false and is_climb_down == true):
 		if (input_z == true and input_space == true):
 			if (climb_timer == false):
@@ -146,10 +183,27 @@ func process_movement(delta):
 				climb_movement = Vector3(climb_movement_x, climb_movement_y, climb_movement_z)
 				TIMER_CLIMB.start()
 				COLLISION_STAND.disabled = true
+				COLLISION_CROUCH.disabled = true
+				COLLISION_SLIDE.disabled = true
 				climb_timer = true
+	
+	if (input_z == true and input_c_just == true and input_shift == true):
+		var slide_movement_x = direction.x
+		var slide_movement_y = gravity_vector.y
+		var slide_movement_z = direction.z
+		slide_movement = Vector3(slide_movement_x, slide_movement_y, slide_movement_z) * speed_slide
+		is_slide = true
+		TIMER_SLIDE.start()
+		slide_timer = true
 	
 	if (climb_timer == true):
 		movement = climb_movement
+	elif (slide_timer == true):
+		movement = slide_movement
+	
+	if (slide_timer == true and input_space_just == true):
+		slide_timer = false
+		TIMER_SLIDE.stop()
 
 ##########################################################################
 func _physics_process(delta):
@@ -185,17 +239,24 @@ func _on_Area_stand_top_body_exited(body):
 	pass
 
 ##########################################################################
-func _on_Area_climb_up_body_entered(body):
+func _on_Area_stand_climb_up_body_entered(body):
 	is_climb_up = true
-func _on_Area_climb_up_body_exited(body):
+func _on_Area_stand_climb_up_body_exited(body):
 	is_climb_up = false
 
-func _on_Area_climb_down_body_entered(body):
+func _on_Area_stand_climb_down_body_entered(body):
 	is_climb_down = true
-func _on_Area_climb_down_body_exited(body):
+func _on_Area_stand_climb_down_body_exited(body):
 	is_climb_down = false
 
 ##########################################################################
 func _on_Timer_climb_timeout():
 	COLLISION_STAND.disabled = false
+	COLLISION_CROUCH.disabled = false
+	COLLISION_SLIDE.disabled = false
 	climb_timer = false
+
+##########################################################################
+func _on_Timer_slide_timeout():
+	slide_timer = false
+	is_slide = false
