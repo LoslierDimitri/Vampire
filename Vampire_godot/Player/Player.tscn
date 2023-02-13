@@ -4,7 +4,7 @@
 [ext_resource path="res://Script/Player.gd" type="Script" id=2]
 
 [sub_resource type="CylinderShape" id=4]
-height = 0.5
+height = 0.1
 
 [sub_resource type="BoxShape" id=2]
 
@@ -30,6 +30,7 @@ far = 4096.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Area_stand_top" type="Area" parent="Player_stand"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 
 [node name="Collision_stand_up" type="CollisionShape" parent="Player_stand/Area_stand_top"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -49,6 +50,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1.5 )
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.1, 0, 0, 0 )
 shape = SubResource( 3 )
 
+[node name="Timer_climb" type="Timer" parent="Player_stand"]
+
 [node name="Player_crouch" type="Spatial" parent="."]
 
 [node name="Position_camera_crouch" type="Position3D" parent="Player_crouch"]
@@ -64,3 +67,11 @@ shape = SubResource( 1 )
 [node name="Collision_crouch" type="CollisionShape" parent="."]
 
 [node name="Collision_slide" type="CollisionShape" parent="."]
+
+[connection signal="body_entered" from="Player_stand/Area_stand_top" to="." method="_on_Area_stand_top_body_entered"]
+[connection signal="body_exited" from="Player_stand/Area_stand_top" to="." method="_on_Area_stand_top_body_exited"]
+[connection signal="body_entered" from="Player_stand/Area_climb_up" to="." method="_on_Area_climb_up_body_entered"]
+[connection signal="body_exited" from="Player_stand/Area_climb_up" to="." method="_on_Area_climb_up_body_exited"]
+[connection signal="body_entered" from="Player_stand/Area_climb_down" to="." method="_on_Area_climb_down_body_entered"]
+[connection signal="body_exited" from="Player_stand/Area_climb_down" to="." method="_on_Area_climb_down_body_exited"]
+[connection signal="timeout" from="Player_stand/Timer_climb" to="." method="_on_Timer_climb_timeout"]
