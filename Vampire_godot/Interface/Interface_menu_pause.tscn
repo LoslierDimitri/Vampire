@@ -15,18 +15,25 @@ margin_bottom = 161.0
 text = "CONTINUE"
 
 [node name="Button_save" type="Button" parent="."]
-margin_left = 108.0
-margin_top = 178.0
-margin_right = 364.0
-margin_bottom = 293.0
+margin_left = 71.0
+margin_top = 184.0
+margin_right = 327.0
+margin_bottom = 299.0
 text = "SAVE"
 
 [node name="Button_load" type="Button" parent="."]
-margin_left = 130.0
-margin_top = 324.0
-margin_right = 359.0
-margin_bottom = 430.0
+margin_left = 373.0
+margin_top = 189.0
+margin_right = 602.0
+margin_bottom = 295.0
 text = "LOAD"
+
+[node name="Button_option" type="Button" parent="."]
+margin_left = 137.0
+margin_top = 308.0
+margin_right = 432.0
+margin_bottom = 441.0
+text = "OPTION"
 
 [node name="Button_exit" type="Button" parent="."]
 margin_left = 146.0
@@ -38,4 +45,5 @@ text = "EXIT"
 [connection signal="pressed" from="Button_continue" to="." method="_on_Button_continue_pressed"]
 [connection signal="pressed" from="Button_save" to="." method="_on_Button_save_pressed"]
 [connection signal="pressed" from="Button_load" to="." method="_on_Button_load_pressed"]
+[connection signal="pressed" from="Button_option" to="." method="_on_Button_option_pressed"]
 [connection signal="pressed" from="Button_exit" to="." method="_on_Button_exit_pressed"]

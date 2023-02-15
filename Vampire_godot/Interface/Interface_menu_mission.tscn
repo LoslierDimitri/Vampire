@@ -1,19 +1,56 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Interface/Interface_menu_mission.gd" type="Script" id=1]
 
 [node name="Interface_menu_mission" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 
-[node name="Button" type="Button" parent="."]
-margin_left = 153.0
-margin_top = 29.0
-margin_right = 424.0
-margin_bottom = 131.0
+[node name="Label" type="Label" parent="."]
+margin_left = 67.0
+margin_top = 21.0
+margin_right = 287.0
+margin_bottom = 92.0
 text = "MENU MISSION"
 
 [node name="Button_exit" type="Button" parent="."]
-margin_left = 97.0
-margin_top = 358.0
-margin_right = 349.0
-margin_bottom = 502.0
+margin_left = 52.0
+margin_top = 83.0
+margin_right = 317.0
+margin_bottom = 148.0
 text = "EXIT"
+
+[node name="Button_object" type="Button" parent="."]
+margin_left = 58.0
+margin_top = 175.0
+margin_right = 295.0
+margin_bottom = 249.0
+text = "MISSION_OBJECT"
+
+[node name="Button_objective" type="Button" parent="."]
+margin_left = 75.0
+margin_top = 277.0
+margin_right = 301.0
+margin_bottom = 357.0
+text = "MISSION_OBJECTIVE"
+
+[node name="Button_power" type="Button" parent="."]
+margin_left = 45.0
+margin_top = 375.0
+margin_right = 331.0
+margin_bottom = 471.0
+text = "MISSION_POWER"
+
+[node name="Button_rune" type="Button" parent="."]
+margin_left = 51.0
+margin_top = 485.0
+margin_right = 300.0
+margin_bottom = 581.0
+text = "MISSION_RUNE"
+
+[connection signal="pressed" from="Button_exit" to="." method="_on_Button_exit_pressed"]
+[connection signal="pressed" from="Button_object" to="." method="_on_Button_object_pressed"]
+[connection signal="pressed" from="Button_objective" to="." method="_on_Button_objective_pressed"]
+[connection signal="pressed" from="Button_power" to="." method="_on_Button_power_pressed"]
+[connection signal="pressed" from="Button_rune" to="." method="_on_Button_rune_pressed"]

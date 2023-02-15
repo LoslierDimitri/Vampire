@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Interface/Interface_menu_new_game_profil.gd" type="Script" id=1]
+
+[node name="Interface_menu_main_new_game_profil" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Button_exit" type="Button" parent="."]
+margin_left = 44.0
+margin_top = 29.0
+margin_right = 288.0
+margin_bottom = 131.0
+text = "EXIT"
+
+[node name="Button_profil_1" type="Button" parent="."]
+margin_left = 45.0
+margin_top = 375.0
+margin_right = 297.0
+margin_bottom = 487.0
+text = "PROFIL_1"
+
+[node name="Button_profil_2" type="Button" parent="."]
+margin_left = 372.0
+margin_top = 380.0
+margin_right = 665.0
+margin_bottom = 498.0
+text = "PROFIL_2"
+
+[node name="Button_profil_3" type="Button" parent="."]
+margin_left = 726.0
+margin_top = 387.0
+margin_right = 983.0
+margin_bottom = 496.0
+text = "PROFIL_3"
+
+[connection signal="pressed" from="Button_exit" to="." method="_on_Button_exit_pressed"]
+[connection signal="pressed" from="Button_profil_1" to="." method="_on_Button_profil_1_pressed"]
+[connection signal="pressed" from="Button_profil_2" to="." method="_on_Button_profil_2_pressed"]
+[connection signal="pressed" from="Button_profil_3" to="." method="_on_Button_profil_3_pressed"]

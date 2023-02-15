@@ -2,15 +2,15 @@
 
 [ext_resource path="res://Script/Main.gd" type="Script" id=1]
 [ext_resource path="res://Interface/Interface_menu_pause.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Interface/Interface_menu_loading.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Interface/Interface_menu_load_game_profil_selected.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Interface/Interface_menu_main.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Interface/Interface_menu_option_gameplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Interface/Interface_menu_option_visual.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Interface/Interface_menu_option_sound.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Main/Save_load.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Interface/Interface_menu_option_graphic.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Interface/Interface_menu_mission.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Interface/Interface_menu_option.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Interface/Interface_menu_new_game_profil.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Interface/Interface_menu_load_game_profil.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Interface/Interface_menu_no.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Interface/Interface_menu_mission_power.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Interface/Interface_menu_mission_rune.tscn" type="PackedScene" id=14]
@@ -21,11 +21,13 @@
 pause_mode = 2
 script = ExtResource( 1 )
 
-[node name="Interface_menu_loading" parent="." instance=ExtResource( 3 )]
+[node name="Save_load" parent="." instance=ExtResource( 8 )]
+
+[node name="Interface_menu_load_game_profil" parent="." instance=ExtResource( 11 )]
 
 [node name="Interface_menu_main" parent="." instance=ExtResource( 4 )]
 
-[node name="Interface_menu_mission" parent="." instance=ExtResource( 10 )]
+[node name="Interface_menu_new_game_profil" parent="." instance=ExtResource( 10 )]
 
 [node name="Interface_menu_mission_object" parent="." instance=ExtResource( 16 )]
 
@@ -37,8 +39,6 @@ script = ExtResource( 1 )
 
 [node name="Interface_menu_no" parent="." instance=ExtResource( 12 )]
 
-[node name="Interface_menu_option" parent="." instance=ExtResource( 11 )]
-
 [node name="Interface_menu_option_gameplay" parent="." instance=ExtResource( 5 )]
 
 [node name="Interface_menu_option_graphic" parent="." instance=ExtResource( 9 )]
@@ -49,4 +49,4 @@ script = ExtResource( 1 )
 
 [node name="Interface_menu_pause" parent="." instance=ExtResource( 2 )]
 
-[node name="Save_load" parent="." instance=ExtResource( 8 )]
+[node name="Interface_menu_load_game_profil_selected" parent="." instance=ExtResource( 3 )]

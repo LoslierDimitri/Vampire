@@ -6,22 +6,13 @@ func _ready():
 	pass
 
 func _on_Button_play_pressed():
-	main_node.load_scene("res://Map/Map_01.tscn", "Map_actual")
-	main_node.load_scene("res://Player/Player.tscn", "Player_actual")
+	main_node.change_interface(main_node.INTERFACE_MENU_MAIN, main_node.INTERFACE_MENU_NEW_GAME_PROFIL, Input.MOUSE_MODE_VISIBLE, "MENU_NEW_GAME_PROFIL", true)
 	
-	var map_actual = get_parent().get_node("Map_actual")
-	var initial_player_position = map_actual.get_node("Position_player_spawn")
-	var player_actual = get_parent().get_node("Player_actual")
-	player_actual.global_transform.origin = initial_player_position.global_transform.origin
-	
-#	main_node.STATE = "IN_GAME"
-#	main_node.INTERFACE_MENU_MAIN.visible = false
-	
-	main_node.change_interface(main_node.INTERFACE_MENU_MAIN, main_node.INTERFACE_MENU_NO, Input.MOUSE_MODE_CAPTURED, "MENU_NO")
-	get_tree().paused = false
-
 func _on_Button_load_pressed():
-	pass
+	main_node.change_interface(main_node.INTERFACE_MENU_MAIN, main_node.INTERFACE_MENU_LOAD_GAME_PROFIL, Input.MOUSE_MODE_VISIBLE, "MENU__LOAD_GA%E_PROFIL", true)
 
 func _on_Button_exit_pressed():
 	get_tree().quit()
+
+func _on_Button_option_pressed():
+	main_node.change_interface(main_node.INTERFACE_MENU_MAIN, main_node.INTERFACE_MENU_OPTION_GAMEPLAY, Input.MOUSE_MODE_VISIBLE, "MENU_OPTION_GAMEPLAY", true)

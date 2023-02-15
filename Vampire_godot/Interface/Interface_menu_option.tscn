@@ -1,5 +1,56 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Interface/Interface_menu_option.gd" type="Script" id=1]
 
 [node name="Interface_menu_option" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 45.0
+margin_top = 21.0
+margin_right = 227.0
+margin_bottom = 65.0
+text = "MENU OPTION"
+
+[node name="Button_exit" type="Button" parent="."]
+margin_left = 28.0
+margin_top = 59.0
+margin_right = 269.0
+margin_bottom = 121.0
+text = "EXIT"
+
+[node name="Button_option_gameplay" type="Button" parent="."]
+margin_left = 51.0
+margin_top = 161.0
+margin_right = 240.0
+margin_bottom = 225.0
+text = "OPTION_GAMEPLAY"
+
+[node name="Button_option_graphic" type="Button" parent="."]
+margin_left = 33.0
+margin_top = 259.0
+margin_right = 271.0
+margin_bottom = 341.0
+text = "OPTION_GRAPHIC"
+
+[node name="Button_option_visual" type="Button" parent="."]
+margin_left = 42.0
+margin_top = 366.0
+margin_right = 289.0
+margin_bottom = 452.0
+text = "OPTION_VISUAL"
+
+[node name="Button_option_sound" type="Button" parent="."]
+margin_left = 42.0
+margin_top = 482.0
+margin_right = 297.0
+margin_bottom = 567.0
+text = "OPTION_SOUND"
+
+[connection signal="pressed" from="Button_exit" to="." method="_on_Button_exit_pressed"]
+[connection signal="pressed" from="Button_option_gameplay" to="." method="_on_Button_option_gameplay_pressed"]
+[connection signal="pressed" from="Button_option_graphic" to="." method="_on_Button_option_graphic_pressed"]
+[connection signal="pressed" from="Button_option_visual" to="." method="_on_Button_option_visual_pressed"]
+[connection signal="pressed" from="Button_option_sound" to="." method="_on_Button_option_sound_pressed"]
