@@ -3,3 +3,17 @@
 [node name="Interface_menu_mission" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Button" type="Button" parent="."]
+margin_left = 153.0
+margin_top = 29.0
+margin_right = 424.0
+margin_bottom = 131.0
+text = "MENU MISSION"
+
+[node name="Button_exit" type="Button" parent="."]
+margin_left = 97.0
+margin_top = 358.0
+margin_right = 349.0
+margin_bottom = 502.0
+text = "EXIT"

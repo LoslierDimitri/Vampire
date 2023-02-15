@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Script/Main.gd" type="Script" id=1]
 [ext_resource path="res://Interface/Interface_menu_pause.tscn" type="PackedScene" id=2]
@@ -11,6 +11,11 @@
 [ext_resource path="res://Interface/Interface_menu_option_graphic.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Interface/Interface_menu_mission.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Interface/Interface_menu_option.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Interface/Interface_menu_no.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Interface/Interface_menu_mission_power.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Interface/Interface_menu_mission_rune.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Interface/Interface_menu_mission_objective.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Interface/Interface_menu_mission_object.tscn" type="PackedScene" id=16]
 
 [node name="Main" type="Spatial"]
 pause_mode = 2
@@ -21,6 +26,16 @@ script = ExtResource( 1 )
 [node name="Interface_menu_main" parent="." instance=ExtResource( 4 )]
 
 [node name="Interface_menu_mission" parent="." instance=ExtResource( 10 )]
+
+[node name="Interface_menu_mission_object" parent="." instance=ExtResource( 16 )]
+
+[node name="Interface_menu_mission_objective" parent="." instance=ExtResource( 15 )]
+
+[node name="Interface_menu_mission_power" parent="." instance=ExtResource( 13 )]
+
+[node name="Interface_menu_mission_rune" parent="." instance=ExtResource( 14 )]
+
+[node name="Interface_menu_no" parent="." instance=ExtResource( 12 )]
 
 [node name="Interface_menu_option" parent="." instance=ExtResource( 11 )]
 

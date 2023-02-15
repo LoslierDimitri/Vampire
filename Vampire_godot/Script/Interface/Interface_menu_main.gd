@@ -14,8 +14,11 @@ func _on_Button_play_pressed():
 	var player_actual = get_parent().get_node("Player_actual")
 	player_actual.global_transform.origin = initial_player_position.global_transform.origin
 	
-	main_node.STATE = "IN_GAME"
-	main_node.INTERFACE_MENU_MAIN.visible = false
+#	main_node.STATE = "IN_GAME"
+#	main_node.INTERFACE_MENU_MAIN.visible = false
+	
+	main_node.change_interface(main_node.INTERFACE_MENU_MAIN, main_node.INTERFACE_MENU_NO, Input.MOUSE_MODE_CAPTURED, "MENU_NO")
+	get_tree().paused = false
 
 func _on_Button_load_pressed():
 	pass
