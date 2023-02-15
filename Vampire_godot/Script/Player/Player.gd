@@ -113,7 +113,9 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		CAMERA_PIVOT.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
-		CAMERA_PIVOT.rotation.x = clamp(CAMERA_PIVOT.rotation.x, deg2rad(-89), deg2rad(89))
+		CAMERA_PIVOT.rotation.x = clamp(CAMERA_PIVOT.rotation.x, deg2rad(-80), deg2rad(80))
+		CAMERA_PIVOT.rotation.y = 0
+		CAMERA_PIVOT.rotation.z = 0
 
 ##########################################################################
 func process_movement(delta):

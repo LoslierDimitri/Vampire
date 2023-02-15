@@ -3,28 +3,32 @@ extends Spatial
 onready var main_node = get_parent()
 
 func _ready():
-#	print(main_node)
 	pass
 
 func save_file(profil):
-	var score_file = "res://Save.save"
-	var file = File.new()
-	file.open(score_file, File.WRITE)
-	var dict = {
-		"Map_actual" : main_node.get_node("Map_actual"),
-		"Player_position" : main_node.get_node("Player_actual").global_transform.origin,
-	}
-	file.store_var(dict)
-	file.close()
+	var Save_data = get_tree().get_nodes_in_group("Sava_data")
+	var file_name = "res://Save_" + str(profil) + ".save"
+	
+	for save_data in Save_data:
+		save_data.update()
+		
+		var file = File.new()
+		file.open(file_name, File.WRITE)
+		
+		var dict = save_data.serialize()
+		
+		file.store_var(dict)
+		file.close()
+	
+	load_file(profil)
 
 func load_file(profil):
-	var score_file = "Save.save"
+	var file_name = "Save_" + str(profil) + ".save"
+	
 	var file = File.new()
-	if file.file_exists(score_file):
-		file.open(score_file, File.READ)
+	if file.file_exists(file_name):
+		file.open(file_name, File.READ)
 		var value = file.get_var()
 		file.close()
-#		print(value.get("Map_actual"))
-		var test = value.get("Map_actual")
-		print(test)
-		print(value.get("Player_position"))
+		
+#		print(value)

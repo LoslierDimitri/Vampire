@@ -9,7 +9,7 @@ func _on_Button_continue_pressed():
 	main_node.change_interface(main_node.INTERFACE_MENU_PAUSE, main_node.INTERFACE_MENU_NO, Input.MOUSE_MODE_CAPTURED, "MENU_NO", false)
 
 func _on_Button_save_pressed():
-#	main_node.get_node("Save_load").save_file(0)
+	main_node.get_node("Save_load").save_file(main_node.PROFIL)
 	pass
 
 func _on_Button_load_pressed():
