@@ -1,14 +1,11 @@
 extends Spatial
 
-#onready var INTERFACE_MENU_LOADING = get_node("Interface_menu_loading")
 onready var INTERFACE_MENU_MAIN = get_node("Interface_menu_main")
-#onready var INTERFACE_MENU_MISSION = get_node("Interface_menu_mission")
 onready var INTERFACE_MENU_MISSION_OBJECT = get_node("Interface_menu_mission_object")
 onready var INTERFACE_MENU_MISSION_OBJECTIVE = get_node("Interface_menu_mission_objective")
 onready var INTERFACE_MENU_MISSION_POWER = get_node("Interface_menu_mission_power")
 onready var INTERFACE_MENU_MISSION_RUNE = get_node("Interface_menu_mission_rune")
 onready var INTERFACE_MENU_NO = get_node("Interface_menu_no")
-#onready var INTERFACE_MENU_OPTION = get_node("Interface_menu_option")
 onready var INTERFACE_MENU_OPTION_GAMEPLAY = get_node("Interface_menu_option_gameplay")
 onready var INTERFACE_MENU_OPTION_GRAPHIC = get_node("Interface_menu_option_graphic")
 onready var INTERFACE_MENU_OPTION_SOUND = get_node("Interface_menu_option_sound")
@@ -35,15 +32,12 @@ func _ready():
 	
 	STATE = "MENU_MAIN"
 	
-#	INTERFACE_MENU_LOADING.visible = false
 	INTERFACE_MENU_MAIN.visible = true
-#	INTERFACE_MENU_MISSION.visible = false
 	INTERFACE_MENU_MISSION_OBJECT.visible = false
 	INTERFACE_MENU_MISSION_OBJECTIVE.visible = false
 	INTERFACE_MENU_MISSION_POWER.visible = false
 	INTERFACE_MENU_MISSION_RUNE.visible = false
 	INTERFACE_MENU_NO.visible = false
-#	INTERFACE_MENU_OPTION.visible = false
 	INTERFACE_MENU_OPTION_GAMEPLAY.visible = false
 	INTERFACE_MENU_OPTION_GRAPHIC.visible = false
 	INTERFACE_MENU_OPTION_SOUND.visible = false
@@ -104,21 +98,10 @@ func change_interface(interface_from, interface_to, mouse_control, state, pause)
 	STATE = state
 	get_tree().paused = pause
 
-#func remove_all_interface():
-#	remove_visible_interface(INTERFACE_MENU_MISSION_OBJECT)
-#	remove_visible_interface(INTERFACE_MENU_MISSION_OBJECTIVE)
-#	remove_visible_interface(INTERFACE_MENU_MISSION_POWER)
-#	remove_visible_interface(INTERFACE_MENU_MISSION_RUNE)
-#	remove_visible_interface(INTERFACE_MENU_NO)
-#	remove_visible_interface(INTERFACE_MENU_OPTION_GAMEPLAY)
-#	remove_visible_interface(INTERFACE_MENU_OPTION_GRAPHIC)
-#	remove_visible_interface(INTERFACE_MENU_OPTION_SOUND)
-#	remove_visible_interface(INTERFACE_MENU_OPTION_VISUAL)
-#	remove_visible_interface(INTERFACE_MENU_PAUSE)
-
 func remove_visible_interface(interface):
 	interface.visible = false
 
+##########################################################################
 func test_change_map():
 	if (Input.is_action_just_pressed("p")):
 		remove_scene("Map_actual")
@@ -132,5 +115,3 @@ func test_change_map():
 		var initial_player_position = map_actual.get_node("Position_player_spawn")
 		var player_actual = get_node("Player_actual")
 		player_actual.global_transform.origin = initial_player_position.global_transform.origin
-		
-#		get_node("@Map_actual@2").name = "Map_actual"

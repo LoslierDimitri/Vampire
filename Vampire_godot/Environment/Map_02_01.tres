@@ -1,0 +1,8 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+ambient_light_color = Color( 0.607843, 0.0862745, 0.0862745, 1 )
+fog_enabled = true
+fog_color = Color( 0.709804, 0.360784, 0.266667, 1 )
+ss_reflections_enabled = true
+ssao_enabled = true

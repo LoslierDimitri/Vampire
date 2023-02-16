@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Load_data.gd" type="Script" id=1]
+
+[node name="Load_data" type="Spatial" groups=["Load_data"]]
+script = ExtResource( 1 )
