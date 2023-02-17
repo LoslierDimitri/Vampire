@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Script/Save_data.gd" type="Script" id=1]
+[ext_resource path="res://Script/Main/Save_data.gd" type="Script" id=1]
 
 [node name="Save_data" type="Spatial" groups=["Sava_data"]]
 script = ExtResource( 1 )

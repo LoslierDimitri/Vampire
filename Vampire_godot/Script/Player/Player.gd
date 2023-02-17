@@ -213,6 +213,7 @@ func _physics_process(delta):
 	
 	move_and_slide_with_snap(movement, snap_vector, Vector3.UP)
 	
+#	print("player position: ", global_transform.origin)
 	reset()
 
 ##########################################################################
