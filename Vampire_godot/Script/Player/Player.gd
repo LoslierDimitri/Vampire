@@ -95,7 +95,7 @@ var object_or_ability_dictionary = {
 	14 : "Blood_link",
 }
 export var max_object_or_ability = 14
-var object_or_ability = 8
+var object_or_ability = 1
 
 ##########################################################################
 func _ready():
