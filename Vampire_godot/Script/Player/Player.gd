@@ -18,6 +18,7 @@ onready var TIMER_SLIDE = get_node("Player_slide/Timer_slide")
 
 onready var NODE_OBJET = get_node("Object")
 onready var NODE_ABILITY = get_node("Ability")
+onready var RAYCAST = get_node("Camera_pivot/Camera/Raycast")
 
 ##########################################################################
 #input variable
@@ -81,18 +82,19 @@ var object_or_ability_dictionary = {
 	1 : "None",
 	2 : "Grenade_explosive",
 	3 : "Grenade_stun",
-	4 : "Mine",
-	5 : "Gun",
-	6 : "Crossbow_bolt",
-	7 : "Crossbow_stun",
-	8 : "Hacking_tool",
-	9 : "Blood_lance",
-	10 : "Vampire_vision",
-	11 : "Hypnosis",
-	12 : "Shadow_form",
-	13 : "Blood_link",
+	4 : "Mine_explosive",
+	5 : "Mine_stun",
+	6 : "Gun",
+	7 : "Crossbow_bolt",
+	8 : "Crossbow_stun",
+	9 : "Hacking_tool",
+	10 : "Blood_lance",
+	11 : "Vampire_vision",
+	12 : "Hypnosis",
+	13 : "Shadow_form",
+	14 : "Blood_link",
 }
-export var max_object_or_ability = 13
+export var max_object_or_ability = 14
 var object_or_ability = 8
 
 ##########################################################################
@@ -331,30 +333,32 @@ func process_action():
 			acion_name = "Grenade_explosive"
 		if (object_or_ability == 3): #Grenade_stun
 			acion_name = "Grenade_stun"
-		if (object_or_ability == 4): #Mine
-			acion_name = "Mine"
-		if (object_or_ability == 5): #Gun
+		if (object_or_ability == 4): #Mine_explosive
+			acion_name = "Mine_explosive"
+		if (object_or_ability == 5): #Mine_stun
+			acion_name = "Mine_stun"
+		if (object_or_ability == 6): #Gun
 			acion_name = "Gun"
-		if (object_or_ability == 6): #Crossbow_bolt
+		if (object_or_ability == 7): #Crossbow_bolt
 			acion_name = "Crossbow_bolt"
-		if (object_or_ability == 7): #Crossbow_stun
+		if (object_or_ability == 8): #Crossbow_stun
 			acion_name = "Crossbow_stun"
-		if (object_or_ability == 8): #Hacking_tool
+		if (object_or_ability == 9): #Hacking_tool
 			acion_name = "Hacking_tool"
-		if (object_or_ability == 9): #Blood_lance
+		if (object_or_ability == 10): #Blood_lance
 			acion_name = "Blood_lance"
-		if (object_or_ability == 10): #Vampire_vision
+		if (object_or_ability == 11): #Vampire_vision
 			acion_name = "Vampire_vision"
-		if (object_or_ability == 11): #Hypnosis
+		if (object_or_ability == 12): #Hypnosis
 			acion_name = "Hypnosis"
-		if (object_or_ability == 12): #Shadow_form
+		if (object_or_ability == 13): #Shadow_form
 			acion_name = "Shadow_form"
-		if (object_or_ability == 13): #Blood_link
+		if (object_or_ability == 14): #Blood_link
 			acion_name = "Blood_link"
 		
-		if (object_or_ability >= 1 and object_or_ability <= 8):
+		if (object_or_ability >= 1 and object_or_ability <= 9):
 			NODE_OBJET.action(acion_name)
-		if (object_or_ability >= 9 and object_or_ability <= 13):
+		if (object_or_ability >= 10 and object_or_ability <= 14):
 			NODE_ABILITY.action(acion_name)
 
 ##########################################################################

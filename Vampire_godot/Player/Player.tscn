@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Environment/Map_01_01.tres" type="Environment" id=1]
 [ext_resource path="res://Script/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Script/Player/Object.gd" type="Script" id=3]
 [ext_resource path="res://Script/Player/Ability.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=8]
+radius = 2.0
+height = 5.0
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.1
@@ -41,6 +45,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5 )
 
 [node name="Position_launch_target" type="Position3D" parent="Camera_pivot/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2 )
+
+[node name="Raycast" type="RayCast" parent="Camera_pivot/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -100 )
+
+[node name="Area_gun" type="Area" parent="Camera_pivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5 )
+
+[node name="Area_gun_collision" type="CollisionShape" parent="Camera_pivot/Camera/Area_gun"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
+shape = SubResource( 8 )
 
 [node name="Player_stand" type="Spatial" parent="."]
 
@@ -132,6 +147,8 @@ script = ExtResource( 4 )
 
 [node name="Blood_link" type="Spatial" parent="Ability"]
 
+[connection signal="body_entered" from="Camera_pivot/Camera/Area_gun" to="Object" method="_on_Area_gun_body_entered"]
+[connection signal="body_exited" from="Camera_pivot/Camera/Area_gun" to="Object" method="_on_Area_gun_body_exited"]
 [connection signal="body_entered" from="Player_stand/Area_stand_top" to="." method="_on_Area_stand_top_body_entered"]
 [connection signal="body_exited" from="Player_stand/Area_stand_top" to="." method="_on_Area_stand_top_body_exited"]
 [connection signal="body_entered" from="Player_stand/Area_stand_climb_up" to="." method="_on_Area_stand_climb_up_body_entered"]
