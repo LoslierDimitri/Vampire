@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Script/Npc/Npc_foe_01.gd" type="Script" id=1]
 [ext_resource path="res://Blender export/Cylinder_01.glb" type="PackedScene" id=2]
+[ext_resource path="res://Npc/Navigation/Navigation_follow.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
@@ -15,5 +16,4 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="NavigationAgent" type="NavigationAgent" parent="."]
-agent_height_offset = -1.0
+[node name="Navigation_follow" parent="." instance=ExtResource( 3 )]

@@ -62,5 +62,7 @@ transform = Transform( -18.876, 9.43801, 5.44903, 0, 10.8981, -18.876, -10.8981,
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -59.5859, 4.80301, -24.6597 )
 mesh = SubResource( 2 )
 
-[node name="Npc_foe_01" parent="." instance=ExtResource( 3 )]
+[node name="Npc_foe" type="Spatial" parent="."]
+
+[node name="Npc_foe_01" parent="Npc_foe" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5441, 2.68622, 34.6324 )

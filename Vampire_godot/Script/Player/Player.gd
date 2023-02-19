@@ -16,6 +16,9 @@ onready var COLLISION_SLIDE = get_node("Collision_slide")
 onready var TIMER_CLIMB = get_node("Player_stand/Timer_climb")
 onready var TIMER_SLIDE = get_node("Player_slide/Timer_slide")
 
+onready var NODE_OBJET = get_node("Object")
+onready var NODE_ABILITY = get_node("Ability")
+
 ##########################################################################
 #input variable
 var input_z = false
@@ -27,6 +30,12 @@ var input_shift = false
 var input_space_just = false
 var input_c = false
 var input_c_just = false
+
+var input_mouse_right = false
+var input_mouse_left = false
+var input_mouse_wheel_up = false
+var input_mouse_wheel_down = false
+var input_mouse_wheel_middle = false
 
 ##########################################################################
 #parameters
@@ -68,6 +77,24 @@ var slide_timer = false
 export var timer_slide_normal = 1
 export var timer_slide_long = 2
 
+var object_or_ability_dictionary = {
+	1 : "None",
+	2 : "Grenade_explosive",
+	3 : "Grenade_stun",
+	4 : "Mine",
+	5 : "Gun",
+	6 : "Crossbow_bolt",
+	7 : "Crossbow_stun",
+	8 : "Hacking_tool",
+	9 : "Blood_lance",
+	10 : "Vampire_vision",
+	11 : "Hypnosis",
+	12 : "Shadow_form",
+	13 : "Blood_link",
+}
+export var max_object_or_ability = 13
+var object_or_ability = 8
+
 ##########################################################################
 func _ready():	
 	CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_STAND.global_transform.origin
@@ -107,6 +134,17 @@ func input():
 		input_c = true
 	if (Input.is_action_just_pressed("c")):
 		input_c_just = true
+	
+	if (Input.is_action_pressed("mouse_left")):
+		input_mouse_left = true
+	if (Input.is_action_just_pressed("mouse_right")):
+		input_mouse_right = true
+	if (Input.is_action_pressed("mouse_middle")):
+		input_mouse_wheel_middle = true
+	if (Input.is_action_just_released("mouse_middle_up")):
+		input_mouse_wheel_up = true
+	if (Input.is_action_just_released("mouse_middle_down")):
+		input_mouse_wheel_down = true
 
 ##########################################################################
 func _input(event):
@@ -116,6 +154,12 @@ func _input(event):
 		CAMERA_PIVOT.rotation.x = clamp(CAMERA_PIVOT.rotation.x, deg2rad(-80), deg2rad(80))
 		CAMERA_PIVOT.rotation.y = 0
 		CAMERA_PIVOT.rotation.z = 0
+	
+#	if event.is_pressed():
+#		if event.button_index == BUTTON_WHEEL_UP:
+#			input_mouse_wheel_up = true
+#		if event.button_index == BUTTON_WHEEL_DOWN:
+#			input_mouse_wheel_down = true
 
 ##########################################################################
 func process_movement(delta):
@@ -201,9 +245,9 @@ func process_movement(delta):
 	elif (slide_timer == true):
 		movement = slide_movement
 	
-	if (slide_timer == true and input_space_just == true):
-		slide_timer = false
-		TIMER_SLIDE.stop()
+#	if (slide_timer == true and input_space_just == true):
+#		slide_timer = false
+#		TIMER_SLIDE.stop()
 
 ##########################################################################
 func _physics_process(delta):
@@ -211,9 +255,10 @@ func _physics_process(delta):
 	
 	process_movement(delta)
 	
+	process_action()
+	
 	move_and_slide_with_snap(movement, snap_vector, Vector3.UP)
 	
-#	print("player position: ", global_transform.origin)
 	reset()
 
 ##########################################################################
@@ -228,6 +273,12 @@ func reset():
 	input_c = false
 	input_c_just = false
 	
+	input_mouse_right = false
+	input_mouse_left = false
+	input_mouse_wheel_up = false
+	input_mouse_wheel_down = false
+	input_mouse_wheel_middle = false
+	
 	direction = Vector3()
 	movement = Vector3()
 	
@@ -235,20 +286,25 @@ func reset():
 
 ##########################################################################
 func _on_Area_stand_top_body_entered(body):
-	jump_stop = true
+	if (body.is_in_group("No_collision") == false):
+		jump_stop = true
 func _on_Area_stand_top_body_exited(body):
 	pass
 
 ##########################################################################
 func _on_Area_stand_climb_up_body_entered(body):
-	is_climb_up = true
+	if (body.is_in_group("No_collision") == false):
+		is_climb_up = true
 func _on_Area_stand_climb_up_body_exited(body):
-	is_climb_up = false
+	if (body.is_in_group("No_collision") == false):
+		is_climb_up = false
 
 func _on_Area_stand_climb_down_body_entered(body):
-	is_climb_down = true
+	if (body.is_in_group("No_collision") == false):
+		is_climb_down = true
 func _on_Area_stand_climb_down_body_exited(body):
-	is_climb_down = false
+	if (body.is_in_group("No_collision") == false):
+		is_climb_down = false
 
 ##########################################################################
 func _on_Timer_climb_timeout():
@@ -261,3 +317,56 @@ func _on_Timer_climb_timeout():
 func _on_Timer_slide_timeout():
 	slide_timer = false
 	is_slide = false
+
+##########################################################################
+func process_action():
+	change_object_or_ability()
+	
+	var acion_name = ""
+	
+	if (input_mouse_right == true):
+		if (object_or_ability == 1): #None
+			acion_name = "None"
+		if (object_or_ability == 2): #Grenade_explosive
+			acion_name = "Grenade_explosive"
+		if (object_or_ability == 3): #Grenade_stun
+			acion_name = "Grenade_stun"
+		if (object_or_ability == 4): #Mine
+			acion_name = "Mine"
+		if (object_or_ability == 5): #Gun
+			acion_name = "Gun"
+		if (object_or_ability == 6): #Crossbow_bolt
+			acion_name = "Crossbow_bolt"
+		if (object_or_ability == 7): #Crossbow_stun
+			acion_name = "Crossbow_stun"
+		if (object_or_ability == 8): #Hacking_tool
+			acion_name = "Hacking_tool"
+		if (object_or_ability == 9): #Blood_lance
+			acion_name = "Blood_lance"
+		if (object_or_ability == 10): #Vampire_vision
+			acion_name = "Vampire_vision"
+		if (object_or_ability == 11): #Hypnosis
+			acion_name = "Hypnosis"
+		if (object_or_ability == 12): #Shadow_form
+			acion_name = "Shadow_form"
+		if (object_or_ability == 13): #Blood_link
+			acion_name = "Blood_link"
+		
+		if (object_or_ability >= 1 and object_or_ability <= 8):
+			NODE_OBJET.action(acion_name)
+		if (object_or_ability >= 9 and object_or_ability <= 13):
+			NODE_ABILITY.action(acion_name)
+
+##########################################################################
+func change_object_or_ability():
+	if (input_mouse_wheel_up == true or input_mouse_wheel_down == true):
+		if (input_mouse_wheel_up == true):
+			object_or_ability += 1
+			if (object_or_ability > max_object_or_ability):
+				object_or_ability = 1
+		elif(input_mouse_wheel_down == true):
+			object_or_ability -= 1
+			if (object_or_ability < 1):
+				object_or_ability = max_object_or_ability
+		
+		print(object_or_ability_dictionary.get(object_or_ability))

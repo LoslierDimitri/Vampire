@@ -9,8 +9,8 @@ var player_position
 var player_orientation
 
 func update():
-	update_map()
 	update_player()
+	update_map()
 
 func update_map():
 	if (main_node.get_node("Map_actual") != null):
