@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Interface/Interface_menu_no.gd" type="Script" id=1]
 
 [node name="Interface_menu_no" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 457.0
@@ -10,3 +13,16 @@ margin_top = 260.0
 margin_right = 504.0
 margin_bottom = 311.0
 text = "CENTER"
+
+[node name="TEST_weapon_name" type="Label" parent="."]
+margin_left = 25.0
+margin_top = 14.0
+margin_right = 271.0
+margin_bottom = 77.0
+text = "test"
+
+[node name="LOG" type="Label" parent="."]
+margin_left = 673.0
+margin_top = 7.0
+margin_right = 1020.0
+margin_bottom = 424.0

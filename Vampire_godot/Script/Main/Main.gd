@@ -86,6 +86,7 @@ func load_scene_player(load_scene, load_name):
 	load_instance = load_scene.instance()
 	load_instance.name = load_name
 	add_child(load_instance)
+	INTERFACE_MENU_NO.get_player()
 
 func remove_scene(remove_name):
 	var node_to_remove = get_node(remove_name)
