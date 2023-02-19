@@ -98,7 +98,9 @@ export var max_object_or_ability = 14
 var object_or_ability = 8
 
 ##########################################################################
-func _ready():	
+func _ready():
+#	INTERFACE_USER.visible = false
+	
 	CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_STAND.global_transform.origin
 	
 	COLLISION_STAND.disabled = false
@@ -252,7 +254,7 @@ func process_movement(delta):
 #		TIMER_SLIDE.stop()
 
 ##########################################################################
-func _physics_process(delta):
+func _physics_process(delta):	
 	input()
 	
 	process_movement(delta)

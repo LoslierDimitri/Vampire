@@ -11,6 +11,10 @@ onready var GRENADE_EXPLOSIVE = load("res://Object/Grenade_explosive.tscn")
 onready var GRENADE_STUN = load("res://Object/Grenade_stun.tscn")
 onready var MINE_EXPLOSION = load("res://Object/Mine_explosive.tscn")
 onready var MINE_STUN = load("res://Object/Mine_stun.tscn")
+onready var GUN = load("res://Object/Gun.tscn")
+onready var CROSSBOW_BOLT = load("res://Object/Crossbow_bolt.tscn")
+onready var CROSSBOW_STUN = load("res://Object/Crossbow_stun.tscn")
+onready var HACKING_TOOL = load("res://Object/Hacking_tool.tscn")
 
 export var grenade_explosive_launch_force = 20
 
@@ -20,7 +24,36 @@ export var mine_explosive_max_range = 5
 
 export var mine_stun_max_range = 5
 
-var gun_list
+var gun_list = []
+var gun_instance
+var gun
+
+var crossbow_bolt_instance
+var crossbow_bolt
+
+var crossbow_stun_instance
+var crossbow_stun
+
+export var hacking_tool_launch_force = 15
+
+func _ready():
+	gun_instance = GUN.instance()
+	gun_instance.name = "gun"
+	gun_instance.global_transform.origin = Vector3(0, -200, 0)
+	add_child(gun_instance)
+	gun = get_node("gun")
+	
+	crossbow_bolt_instance = CROSSBOW_BOLT.instance()
+	crossbow_bolt_instance.name = "crossbow_bolt"
+	crossbow_bolt_instance.global_transform.origin = Vector3(0, -200, 0)
+	add_child(crossbow_bolt_instance)
+	crossbow_bolt = get_node("crossbow_bolt")
+	
+	crossbow_stun_instance = CROSSBOW_STUN.instance()
+	crossbow_stun_instance.name = "crossbow_stun"
+	crossbow_stun_instance.global_transform.origin = Vector3(0, -200, 0)
+	add_child(crossbow_stun_instance)
+	crossbow_stun = get_node("crossbow_stun")
 
 ##########################################################################
 func action(object_name):
@@ -80,27 +113,35 @@ func action(object_name):
 	
 	##########################################################################
 	if (object_name == "Gun"):
-		print("action Gun")
+		print("action Gun with list: ", gun_list)
 		
+		gun.damage(gun_list)
 	
 	##########################################################################
 	if (object_name == "Crossbow_bolt"):
 		print("action Crossbow_bolt")
 		
+		crossbow_bolt.damage(RAYCAST)
 	
 	##########################################################################
 	if (object_name == "Crossbow_stun"):
 		print("action Crossbow_stun")
 		
+		crossbow_stun.damage(RAYCAST)
 	
 	##########################################################################
 	if (object_name == "Hacking_tool"):
 		print("action Hacking_tool")
 		
-		
+		var hacking_tool_instance = HACKING_TOOL.instance()
+		hacking_tool_instance.global_transform.origin = POSITION_LAUNCH.global_transform.origin
+		hacking_tool_instance.apply_impulse(self.global_transform.origin, (POSITION_LAUNCH_TARGET.global_transform.origin - POSITION_LAUNCH.global_transform.origin) * hacking_tool_launch_force)
+		main_node.add_child(hacking_tool_instance)
 
 func _on_Area_gun_body_entered(body):
-	pass # Replace with function body.
+	if (body.is_in_group("Can_take_damage") == true):
+		gun_list.append(body)
 
 func _on_Area_gun_body_exited(body):
-	pass # Replace with function body.
+	if (body.is_in_group("Can_take_damage") == true):
+		gun_list.erase(body)

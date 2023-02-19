@@ -9,7 +9,7 @@
 [sub_resource type="SphereShape" id=3]
 radius = 10.0
 
-[node name="Mine_explosive" type="RigidBody"]
+[node name="Mine_explosive" type="RigidBody" groups=["No_collision"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

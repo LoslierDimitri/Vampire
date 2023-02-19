@@ -51,7 +51,7 @@ func _process(delta):
 	interface_control()
 	test_change_map()
 
-func interface_control():	
+func interface_control():
 	if (STATE == "MENU_NO"):
 		if (Input.is_action_just_pressed("esc")):
 			change_interface(INTERFACE_MENU_NO, INTERFACE_MENU_PAUSE, Input.MOUSE_MODE_VISIBLE, "MENU_PAUSE", true)

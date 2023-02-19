@@ -3,3 +3,10 @@
 [node name="Interface_menu_no" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 457.0
+margin_top = 260.0
+margin_right = 504.0
+margin_bottom = 311.0
+text = "CENTER"

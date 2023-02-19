@@ -28,7 +28,7 @@ height = 0.5
 [sub_resource type="CapsuleShape" id=6]
 height = 0.5
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=["No_collision"]]
 pause_mode = 1
 script = ExtResource( 2 )
 
@@ -118,34 +118,8 @@ shape = SubResource( 6 )
 [node name="Object" type="Spatial" parent="."]
 script = ExtResource( 3 )
 
-[node name="None" type="Spatial" parent="Object"]
-
-[node name="Grenade_explosive" type="Spatial" parent="Object"]
-
-[node name="Grenade_stun" type="Spatial" parent="Object"]
-
-[node name="Mine" type="Spatial" parent="Object"]
-
-[node name="Gun" type="Spatial" parent="Object"]
-
-[node name="Crossbow_bolt" type="Spatial" parent="Object"]
-
-[node name="Crossbow_stun" type="Spatial" parent="Object"]
-
-[node name="Hacking_tool" type="Spatial" parent="Object"]
-
 [node name="Ability" type="Spatial" parent="."]
 script = ExtResource( 4 )
-
-[node name="Blood_lance" type="Spatial" parent="Ability"]
-
-[node name="Vampire_vision" type="Spatial" parent="Ability"]
-
-[node name="Hypnosis" type="Spatial" parent="Ability"]
-
-[node name="Shadow_form" type="Spatial" parent="Ability"]
-
-[node name="Blood_link" type="Spatial" parent="Ability"]
 
 [connection signal="body_entered" from="Camera_pivot/Camera/Area_gun" to="Object" method="_on_Area_gun_body_entered"]
 [connection signal="body_exited" from="Camera_pivot/Camera/Area_gun" to="Object" method="_on_Area_gun_body_exited"]
