@@ -25,5 +25,6 @@ func print_log():
 	var text_to_print = ""
 	
 	text_to_print += "object or ability: " + player_node.object_or_ability_dictionary.get(player_node.object_or_ability)
+	text_to_print += "\nlife point: " + str(player_node.life_point)
 	
 	LOG.text = text_to_print

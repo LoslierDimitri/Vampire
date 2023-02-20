@@ -12,6 +12,9 @@ var target_close = false
 
 var direction = Vector3()
 
+export var life_point = 100
+export var stun_point = 2
+
 func _ready():
 	NAVIGATION_AGENT.change_pathfinding(main_node.get_node("Player_actual"))
 
@@ -23,3 +26,17 @@ func _physics_process(delta):
 	if (direction != null):
 		if (target_reachable == true and target_close == false):
 			move_and_collide(direction)
+
+func take_damage(damage, type):
+#	print(self.get_instance_id(), ": npc take damage")
+	
+	if (type == "damage"):
+		life_point -= damage
+		if (life_point <= 0):
+			queue_free()
+	
+	if (type == "stun"):
+		stun_point -= damage
+		if (stun_point <= 0):
+			print("stun")
+			pass

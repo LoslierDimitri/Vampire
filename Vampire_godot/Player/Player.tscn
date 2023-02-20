@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Environment/Map_01_01.tres" type="Environment" id=1]
 [ext_resource path="res://Script/Player/Player.gd" type="Script" id=2]
@@ -8,6 +8,10 @@
 [sub_resource type="CapsuleShape" id=8]
 radius = 2.0
 height = 5.0
+
+[sub_resource type="CapsuleShape" id=9]
+
+[sub_resource type="CapsuleShape" id=10]
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.1
@@ -56,6 +60,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5 )
 [node name="Area_gun_collision" type="CollisionShape" parent="Camera_pivot/Camera/Area_gun"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
 shape = SubResource( 8 )
+
+[node name="Area_sword_normal" type="Area" parent="Camera_pivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2 )
+visible = false
+
+[node name="Area_sword_normal_collision" type="CollisionShape" parent="Camera_pivot/Camera/Area_sword_normal"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="Area_sword_long" type="Area" parent="Camera_pivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2 )
+visible = false
+
+[node name="Area_sword_long_collision" type="CollisionShape" parent="Camera_pivot/Camera/Area_sword_long"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 10 )
 
 [node name="Player_stand" type="Spatial" parent="."]
 

@@ -97,6 +97,8 @@ var object_or_ability_dictionary = {
 export var max_object_or_ability = 14
 var object_or_ability = 1
 
+export var life_point = 100
+
 ##########################################################################
 func _ready():
 #	INTERFACE_USER.visible = false
@@ -376,3 +378,7 @@ func change_object_or_ability():
 				object_or_ability = max_object_or_ability
 		
 		print(object_or_ability_dictionary.get(object_or_ability))
+
+##########################################################################
+func get_damage(damage, type):
+	print(self.get_instance_id(), ": player take damage")

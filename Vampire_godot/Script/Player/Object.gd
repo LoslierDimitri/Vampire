@@ -59,11 +59,12 @@ func _ready():
 func action(object_name):
 	##########################################################################
 	if (object_name == "None"):
-		print("action none")
+#		print("action none")
+		pass
 	
 	##########################################################################
 	if (object_name == "Grenade_explosive"):
-		print("action grenade_explosion")
+#		print("action grenade_explosion")
 		
 		var grenade_explosive_instance = GRENADE_EXPLOSIVE.instance()
 		grenade_explosive_instance.global_transform.origin = POSITION_LAUNCH.global_transform.origin
@@ -72,7 +73,7 @@ func action(object_name):
 	
 	##########################################################################
 	if (object_name == "Grenade_stun"):
-		print("action Grenade_stun")
+#		print("action Grenade_stun")
 		
 		var grenade_stun_instance = GRENADE_STUN.instance()
 		grenade_stun_instance.global_transform.origin = POSITION_LAUNCH.global_transform.origin
@@ -81,7 +82,7 @@ func action(object_name):
 	
 	##########################################################################
 	if (object_name == "Mine_explosive"):
-		print("action Mine_explosive")
+#		print("action Mine_explosive")
 		
 		RAYCAST.force_raycast_update()
 		if !RAYCAST.is_colliding():
@@ -97,7 +98,7 @@ func action(object_name):
 	
 	##########################################################################
 	if (object_name == "Mine_stun"):
-		print("action Mine_stun")
+#		print("action Mine_stun")
 		
 		RAYCAST.force_raycast_update()
 		if !RAYCAST.is_colliding():
@@ -113,25 +114,25 @@ func action(object_name):
 	
 	##########################################################################
 	if (object_name == "Gun"):
-		print("action Gun with list: ", gun_list)
+#		print("action Gun with list: ", gun_list)
 		
 		gun.damage(gun_list)
 	
 	##########################################################################
 	if (object_name == "Crossbow_bolt"):
-		print("action Crossbow_bolt")
+#		print("action Crossbow_bolt")
 		
 		crossbow_bolt.damage(RAYCAST)
 	
 	##########################################################################
 	if (object_name == "Crossbow_stun"):
-		print("action Crossbow_stun")
+#		print("action Crossbow_stun")
 		
 		crossbow_stun.damage(RAYCAST)
 	
 	##########################################################################
 	if (object_name == "Hacking_tool"):
-		print("action Hacking_tool")
+#		print("action Hacking_tool")
 		
 		var hacking_tool_instance = HACKING_TOOL.instance()
 		hacking_tool_instance.global_transform.origin = POSITION_LAUNCH.global_transform.origin
