@@ -8,7 +8,8 @@ onready var LOG = get_node("LOG")
 onready var TEST_WEAPON_NAME = get_node("TEST_weapon_name")
 
 func _ready():
-	print(player_node)
+#	print(player_node)
+	pass
 
 func _process(delta):
 	if (main_node.STATE == "MENU_NO"):

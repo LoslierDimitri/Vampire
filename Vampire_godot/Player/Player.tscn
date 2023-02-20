@@ -28,7 +28,7 @@ height = 0.5
 [sub_resource type="CapsuleShape" id=6]
 height = 0.5
 
-[node name="Player" type="KinematicBody" groups=["No_collision"]]
+[node name="Player" type="KinematicBody" groups=["Can_take_damage", "No_collision"]]
 pause_mode = 1
 script = ExtResource( 2 )
 
