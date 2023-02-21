@@ -18,10 +18,12 @@ func _ready():
 	AREA_STICK_COLLISION.scale.y = scale_object
 	AREA_STICK_COLLISION.scale.z = scale_object
 
-func damage():
-	pass
+func hack():
+	if (body_hacked.is_in_group("Can_take_hack") == true):
+		body_hacked.take_hack()
 
 func _on_Area_stick_body_entered(body):
 	if (body.is_in_group("No_collision") == false):
 		set_mode(MODE_STATIC)
 		body_hacked = body
+		hack()
