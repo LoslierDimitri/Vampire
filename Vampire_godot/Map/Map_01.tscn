@@ -67,4 +67,13 @@ mesh = SubResource( 2 )
 [node name="Npc_foe_01" parent="Npc_foe" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5441, 2.68622, 34.6324 )
 
+[node name="Npc_foe_02" parent="Npc_foe" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2562, 2.68622, 26.9814 )
+
+[node name="Npc_foe_03" parent="Npc_foe" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.22377, 2.68622, 37.9469 )
+
+[node name="Npc_foe_04" parent="Npc_foe" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7696, 2.68622, 36.1911 )
+
 [node name="Npc_neutral" type="Spatial" parent="."]
