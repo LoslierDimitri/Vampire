@@ -41,14 +41,6 @@ func explosion(npc_node):
 		if (node.global_transform.origin.distance_to(global_transform.origin) <= explosion_range):
 				if (node.is_in_group("Can_take_stun") == true):
 					node.take_damage(damage, type)
-#		var space_state = get_world().direct_space_state
-#		var result = space_state.intersect_ray(global_transform.origin, node.global_transform.origin)
-#
-#		if (result):
-#			var collider = result.collider
-#			if (collider.global_transform.origin.distance_to(global_transform.origin) <= explosion_range):
-#				if (collider.is_in_group("Can_take_stun") == true):
-#					collider.take_damage(damage, type)
 
 func _on_Timer_timeout():
 	damage()
