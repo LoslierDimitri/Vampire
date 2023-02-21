@@ -380,5 +380,9 @@ func change_object_or_ability():
 		print(object_or_ability_dictionary.get(object_or_ability))
 
 ##########################################################################
-func get_damage(damage, type):
-	print(self.get_instance_id(), ": player take damage")
+func take_damage(damage, type):
+#	print(self.get_instance_id(), ": player take damage")
+		if (type == "damage"):
+			life_point -= damage
+		if (life_point <= 0):
+			print("dead")

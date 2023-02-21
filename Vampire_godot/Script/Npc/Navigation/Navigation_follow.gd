@@ -7,7 +7,7 @@ onready var NAVIGATION_AGENT = get_node("NavigationAgent")
 var target_reachable = false
 export var target_reachable_distance = 5
 var target_close = false
-export var target_close_distance = 5
+export var target_close_distance = 2
 
 func pathfinding(target_pathfinding, delta):
 	if (target_pathfinding != null):
