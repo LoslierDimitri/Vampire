@@ -41,7 +41,7 @@ func _physics_process(delta):
 	if (is_player_in_area_attack_zone == true and can_attack_timer == true):
 		attack(main_node.get_node("Player_actual"))
 
-func take_damage(damage, type):	
+func take_damage(damage, type):
 	if (type == "damage"):
 		life_point -= damage
 		if (life_point <= 0):

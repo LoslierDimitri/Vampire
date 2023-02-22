@@ -16,6 +16,7 @@ onready var COLLISION_SLIDE = get_node("Collision_slide")
 onready var TIMER_CLIMB = get_node("Player_stand/Timer_climb")
 onready var TIMER_SLIDE = get_node("Player_slide/Timer_slide")
 
+onready var NODE_SWORD = get_node("Sword")
 onready var NODE_OBJET = get_node("Object")
 onready var NODE_ABILITY = get_node("Ability")
 onready var RAYCAST = get_node("Camera_pivot/Camera/Raycast")
@@ -32,8 +33,10 @@ var input_space_just = false
 var input_c = false
 var input_c_just = false
 
+var input_alt_just = false
+
 var input_mouse_right = false
-var input_mouse_left = false
+var input_mouse_left_just = false
 var input_mouse_wheel_up = false
 var input_mouse_wheel_down = false
 var input_mouse_wheel_middle = false
@@ -141,8 +144,8 @@ func input():
 	if (Input.is_action_just_pressed("c")):
 		input_c_just = true
 	
-	if (Input.is_action_pressed("mouse_left")):
-		input_mouse_left = true
+	if (Input.is_action_just_pressed("mouse_left")):
+		input_mouse_left_just = true
 	if (Input.is_action_just_pressed("mouse_right")):
 		input_mouse_right = true
 	if (Input.is_action_pressed("mouse_middle")):
@@ -151,6 +154,9 @@ func input():
 		input_mouse_wheel_up = true
 	if (Input.is_action_just_released("mouse_middle_down")):
 		input_mouse_wheel_down = true
+	
+	if (Input.is_action_just_pressed("alt")):
+		input_alt_just = true
 
 ##########################################################################
 func _input(event):
@@ -279,8 +285,10 @@ func reset():
 	input_c = false
 	input_c_just = false
 	
+	input_alt_just = false
+	
 	input_mouse_right = false
-	input_mouse_left = false
+	input_mouse_left_just = false
 	input_mouse_wheel_up = false
 	input_mouse_wheel_down = false
 	input_mouse_wheel_middle = false
@@ -364,6 +372,11 @@ func process_action():
 			NODE_OBJET.action(acion_name)
 		if (object_or_ability >= 10 and object_or_ability <= 14):
 			NODE_ABILITY.action(acion_name)
+	
+	if (input_mouse_left_just == true):
+		NODE_SWORD.action("damage")
+	if (input_alt_just == true):
+		NODE_SWORD.action("stun")
 
 ##########################################################################
 func change_object_or_ability():
