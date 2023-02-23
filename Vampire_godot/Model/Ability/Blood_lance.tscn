@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 4, 0.2, 0.4 )
+
+[node name="Blood_lance" type="MeshInstance"]
+mesh = SubResource( 1 )
