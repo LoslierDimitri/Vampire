@@ -1,35 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Script/Object/Mine_explosive.gd" type="Script" id=1]
 
-[sub_resource type="BoxShape" id=4]
-
-[sub_resource type="CubeMesh" id=1]
-
-[sub_resource type="SphereShape" id=3]
-
-[sub_resource type="SphereMesh" id=5]
-
-[sub_resource type="SpatialMaterial" id=6]
-flags_transparent = true
-albedo_color = Color( 0.34902, 0.368627, 0.835294, 0.121569 )
-
-[node name="Mine_explosive" type="RigidBody" groups=["No_collision"]]
+[node name="Mine_explosive" type="Spatial"]
 script = ExtResource( 1 )
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 4 )
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
-
-[node name="Area_detection" type="Area" parent="."]
-
-[node name="Area_detection_collision" type="CollisionShape" parent="Area_detection"]
-shape = SubResource( 3 )
-
-[node name="Range_detection" type="MeshInstance" parent="."]
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
-
-[connection signal="body_entered" from="Area_detection" to="." method="_on_Area_body_entered"]

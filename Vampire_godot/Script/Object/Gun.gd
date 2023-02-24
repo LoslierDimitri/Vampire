@@ -1,4 +1,4 @@
-extends StaticBody
+extends Spatial
 
 onready var main_node = get_tree().root.get_node("Main")
 var map_node

@@ -1,29 +1,13 @@
-extends RigidBody
+extends Spatial
 
-export var scale_object = 0.1
-onready var MESH = get_node("MeshInstance")
-onready var COLLISION = get_node("CollisionShape")
-onready var AREA_STICK_COLLISION = get_node("Area_stick/Area_stick_collision")
+onready var main_node = get_tree().root.get_node("Main")
 
-var body_hacked
+onready var HACKING_TOOL = load("res://Object/Hacking_tool_model.tscn")
 
-func _ready():
-	MESH.scale.x = scale_object
-	MESH.scale.y = scale_object
-	MESH.scale.z = scale_object
-	COLLISION.scale.x = scale_object
-	COLLISION.scale.y = scale_object
-	COLLISION.scale.z = scale_object
-	AREA_STICK_COLLISION.scale.x = scale_object
-	AREA_STICK_COLLISION.scale.y = scale_object
-	AREA_STICK_COLLISION.scale.z = scale_object
+export var hacking_tool_launch_force = 15
 
-func hack():
-	if (body_hacked.is_in_group("Can_take_hack") == true):
-		body_hacked.take_hack()
-
-func _on_Area_stick_body_entered(body):
-	if (body.is_in_group("No_collision") == false):
-		set_mode(MODE_STATIC)
-		body_hacked = body
-		hack()
+func damage(position_launch, position_launch_target):
+	var hacking_tool_instance = HACKING_TOOL.instance()
+	hacking_tool_instance.global_transform.origin = position_launch.global_transform.origin
+	hacking_tool_instance.apply_impulse(position_launch.global_transform.origin, (position_launch_target.global_transform.origin - position_launch.global_transform.origin) * hacking_tool_launch_force)
+	main_node.add_child(hacking_tool_instance)

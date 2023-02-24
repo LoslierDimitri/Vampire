@@ -1,4 +1,4 @@
-extends StaticBody
+extends Spatial
 
 export var type = "damage"
 export var damage = 50

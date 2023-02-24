@@ -2,7 +2,7 @@ extends Spatial
 
 onready var main_node = get_tree().root.get_node("Main")
 
-onready var BLOOD_LANCE = load("res://Model/Ability/Blood_lance.tscn")
+onready var BLOOD_LANCE = load("res://Ability/Blood_lance_model.tscn")
 
 export var type = "damage"
 export var damage = 50
