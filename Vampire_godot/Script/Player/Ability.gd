@@ -19,21 +19,26 @@ func _ready():
 	add_child(blood_lance_instance)
 	blood_lance = get_node("blood_lance")
 
+##########################################################################
 func action(ability_name):
+	##########################################################################
 	if (ability_name == "Blood_lance"):
 		print("action blood_lance")
-		
 		blood_lance.damage(RAYCAST)
-		
+	
+	##########################################################################
 	if (ability_name == "Vampire_vision"):
 		print("action vampire_vision")
-		
+	
+	##########################################################################
 	if (ability_name == "Hypnosis"):
 		print("action hypnosis")
-		
+	
+	##########################################################################
 	if (ability_name == "Shadow_form"):
 		print("action shadow_form")
-		
+	
+	##########################################################################
 	if (ability_name == "Blood_link"):
 		print("action blood_link")
-		
+	
