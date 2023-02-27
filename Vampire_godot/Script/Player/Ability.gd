@@ -37,6 +37,7 @@ func action(ability_name):
 	##########################################################################
 	if (ability_name == "Blood_lance"):
 #		print("action blood_lance")
+	
 		if (can_teleport == false):
 			blood_lance.damage(RAYCAST)
 		else:
@@ -45,14 +46,14 @@ func action(ability_name):
 	
 	##########################################################################
 	if (ability_name == "Vampire_vision"):
-		print("action vampire_vision")
+#		print("action vampire_vision")
 		
 		if (vampire_vision_active == false):
-			vampire_vision.vision(true)
 			vampire_vision_active = true
+			vampire_vision.vision(true)
 		else:
-			vampire_vision.vision(false)
 			vampire_vision_active = false
+			vampire_vision.vision(false)
 	
 	##########################################################################
 	if (ability_name == "Hypnosis"):
