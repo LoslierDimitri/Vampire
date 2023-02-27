@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Script/Ability/Hypnosis_model.gd" type="Script" id=1]
+
+[sub_resource type="PrismMesh" id=1]
+
+[node name="Hypnosis_model" type="MeshInstance"]
+mesh = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

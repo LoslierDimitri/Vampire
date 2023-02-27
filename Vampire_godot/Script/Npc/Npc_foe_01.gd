@@ -3,7 +3,6 @@ extends KinematicBody
 onready var main_node = get_tree().root.get_node("Main")
 
 onready var NAVIGATION_AGENT = get_node("Navigation_follow")
-
 onready var TIMER_ATTACK = get_node("Timer_attack")
 
 export var speed = 5

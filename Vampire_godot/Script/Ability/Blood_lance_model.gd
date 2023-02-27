@@ -6,7 +6,11 @@ onready var ability_node = player_node.get_node("Ability")
 
 onready var TIMER = get_node("Timer")
 
+var timer
+
 func _ready():
+	TIMER.set_wait_time(timer)
+	
 	TIMER.start()
 	ability_node.can_teleport = true
 

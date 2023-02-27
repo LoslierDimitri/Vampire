@@ -9,6 +9,7 @@ onready var RAYCAST = player_node.get_node("Camera_pivot").get_node("Camera").ge
 
 onready var BLOOD_LANCE = load("res://Ability/Blood_lance.tscn")
 onready var VAMPIRE_VISION = load("res://Ability/Vampire_vision.tscn")
+onready var HYPNOSIS = load("res://Ability/Hypnosis.tscn")
 
 var blood_lance_instance
 var blood_lance
@@ -18,6 +19,9 @@ var can_teleport = false
 var vampire_vision_instance
 var vampire_vision
 var vampire_vision_active = false
+
+var hypnosis_instance
+var hypnosis
 
 func _ready():
 	blood_lance_instance = BLOOD_LANCE.instance()
@@ -31,6 +35,12 @@ func _ready():
 	vampire_vision_instance.global_transform.origin = Vector3(0, -200, 0)
 	add_child(vampire_vision_instance)
 	vampire_vision = get_node("vampire_vision")
+	
+	hypnosis_instance = HYPNOSIS.instance()
+	hypnosis_instance.name = "hypnosis"
+	hypnosis_instance.global_transform.origin = Vector3(0, -200, 0)
+	add_child(hypnosis_instance)
+	hypnosis = get_node("hypnosis")
 
 ##########################################################################
 func action(ability_name):
@@ -57,7 +67,9 @@ func action(ability_name):
 	
 	##########################################################################
 	if (ability_name == "Hypnosis"):
-		print("action hypnosis")
+#		print("action hypnosis")
+		
+		hypnosis.hypnosis(RAYCAST)
 	
 	##########################################################################
 	if (ability_name == "Shadow_form"):
