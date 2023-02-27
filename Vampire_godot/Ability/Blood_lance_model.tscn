@@ -3,7 +3,7 @@
 [ext_resource path="res://Script/Ability/Blood_lance_model.gd" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=1]
-size = Vector3( 4, 0.1, 0.2 )
+size = Vector3( 0.2, 0.1, 4 )
 
 [node name="Blood_lance_model" type="MeshInstance"]
 mesh = SubResource( 1 )

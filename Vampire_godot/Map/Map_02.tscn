@@ -29,3 +29,7 @@ transform = Transform( 3.14473, 0, 0, 0, 3.14473, 0, 0, 0, 3.14473, 8.13867, 5.8
 
 [node name="Cube_02" parent="NavigationMeshInstance" instance=ExtResource( 1 )]
 transform = Transform( 2.63673, 0, 0, 0, 2.63673, 0, 0, 0, 2.63673, 10.6455, 13.3533, 0 )
+
+[node name="Npc_foe" type="Spatial" parent="."]
+
+[node name="Npc_neutral" type="Spatial" parent="."]

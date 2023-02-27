@@ -11,6 +11,8 @@ onready var BLOOD_LANCE = load("res://Ability/Blood_lance.tscn")
 
 var blood_lance_instance
 var blood_lance
+var teleport_position
+var can_teleport = false
 
 func _ready():
 	blood_lance_instance = BLOOD_LANCE.instance()
@@ -23,8 +25,12 @@ func _ready():
 func action(ability_name):
 	##########################################################################
 	if (ability_name == "Blood_lance"):
-		print("action blood_lance")
-		blood_lance.damage(RAYCAST)
+#		print("action blood_lance")
+		if (can_teleport == false):
+			blood_lance.damage(RAYCAST)
+		else:
+			player_node.global_transform.origin = teleport_position
+			can_teleport = false
 	
 	##########################################################################
 	if (ability_name == "Vampire_vision"):

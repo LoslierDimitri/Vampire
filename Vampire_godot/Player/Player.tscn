@@ -16,6 +16,7 @@ height = 5.0
 
 [sub_resource type="CylinderShape" id=4]
 height = 0.1
+radius = 0.5
 
 [sub_resource type="BoxShape" id=2]
 
