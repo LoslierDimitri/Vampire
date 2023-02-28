@@ -21,13 +21,17 @@ export var damage = 10
 export var type = "damage"
 var can_attack_timer = true
 
+var is_hypnosis = false
+
 func _ready():
 	NAVIGATION_AGENT.change_pathfinding(main_node.get_node("Player_actual"))
 
 func _physics_process(delta):
 	direction = Vector3()
-	direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
-	direction *= speed
+	
+	if (is_hypnosis == false):
+		direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
+		direction *= speed
 	
 	if (direction != null):
 		if (target_reachable == true and target_close == false):
@@ -39,6 +43,8 @@ func _physics_process(delta):
 	
 	if (is_player_in_area_attack_zone == true and can_attack_timer == true):
 		attack(main_node.get_node("Player_actual"))
+	
+	reset()
 
 func take_damage(damage, type):
 	if (type == "damage"):
@@ -50,6 +56,11 @@ func take_damage(damage, type):
 		stun_point -= damage
 		if (stun_point <= 0):
 			print("stun")
+
+func take_hypnose():
+	is_hypnosis = true
+func reset_hypnosis():
+	is_hypnosis = false
 
 func attack(player):
 	player.take_damage(damage, type)
@@ -66,3 +77,7 @@ func _on_Area_attack_zone_body_entered(body):
 func _on_Area_attack_zone_body_exited(body):
 	if (body.is_in_group("Player") == true):
 		is_player_in_area_attack_zone = false
+
+func reset():
+	pass
+#	is_hypnosis = false
