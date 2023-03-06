@@ -54,29 +54,29 @@ func _physics_process(delta):
 	reset()
 
 func take_damage(damage, type):
-	for node in blood_link_list:
-		if (is_instance_valid(node) == true):
-			if (node.get_instance_id() != self.get_instance_id()):
-				if (type == "damage"):
-					node.life_point -= damage
+	if (is_blood_link == true):
+		for node in blood_link_list:
+			if (type == "damage"):
+				node.life_point -= damage
 				if (node.life_point <= 0):
-					blood_link_list.erase(node)
 					node.queue_free()
 				
-				if (type == "stun"):
-					node.stun_point -= damage
+			if (type == "stun"):
+				node.stun_point -= damage
 				if (node.stun_point <= 0):
-					blood_link_list.erase(node)
 					print("stun")
-	
-	if (type == "damage"):
-		life_point -= damage
-		if (life_point <= 0):
-			queue_free()
-	if (type == "stun"):
-		stun_point -= damage
-		if (stun_point <= 0):
-			print("stun")
+	else:
+		if (type == "damage"):
+			life_point -= damage
+			if (life_point <= 0):
+				var blood_lance = get_node("blood_lance")
+				if (blood_lance != null):
+					player_node.get_node("Ability").can_teleport = false
+				queue_free()
+		if (type == "stun"):
+			stun_point -= damage
+			if (stun_point <= 0):
+				print("stun")
 
 func take_hypnose():
 	is_hypnosis = true

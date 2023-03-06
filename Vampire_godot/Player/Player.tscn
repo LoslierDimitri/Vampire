@@ -15,6 +15,7 @@ height = 5.0
 [sub_resource type="CapsuleShape" id=10]
 
 [sub_resource type="CylinderShape" id=4]
+height = 0.1
 radius = 0.5
 
 [sub_resource type="BoxShape" id=2]
@@ -92,7 +93,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 
 [node name="Collision_stand_up" type="CollisionShape" parent="Player_stand/Area_stand_top"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 4 )
 
 [node name="Area_stand_climb_up" type="Area" parent="Player_stand"]

@@ -4,5 +4,3 @@
 
 [node name="Blood_lance" type="Spatial"]
 script = ExtResource( 1 )
-
-[node name="Timer" type="Timer" parent="."]

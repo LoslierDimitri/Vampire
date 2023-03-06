@@ -25,9 +25,6 @@ func blood_link(raycast):
 		else:
 			collider.is_blood_link = false
 			blood_link_list.erase(collider)
-	
-	print(blood_link_list)
-	print(blood_link_list.size())
 
 func clean_blood_link_list():
 	actual_blood_link = 0

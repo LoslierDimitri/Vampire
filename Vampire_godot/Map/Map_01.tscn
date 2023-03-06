@@ -35,6 +35,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.98222, 8.92944, -10.2945 )
 navmesh = SubResource( 3 )
 
 [node name="GIProbe" type="GIProbe" parent="NavigationMeshInstance"]
+visible = false
 extents = Vector3( 100, 100, 100 )
 energy = 0.5
 interior = true
