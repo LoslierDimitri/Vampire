@@ -8,10 +8,12 @@ onready var CAMERA = get_node("Camera_pivot/Camera")
 onready var POSITION_CAMERA_STAND = get_node("Player_stand/Position_camera_stand")
 onready var POSITION_CAMERA_CROUCH = get_node("Player_crouch/Position_camera_crouch")
 onready var POSITION_CAMERA_SLIDE = get_node("Player_slide/Position_camera_slide")
+onready var POSITION_CAMERA_SHADOW_FORM = get_node("Player_shadow_form/Position_camera_shadow_form")
 
 onready var COLLISION_STAND = get_node("Collision_stand")
 onready var COLLISION_CROUCH = get_node("Collision_crouch")
 onready var COLLISION_SLIDE = get_node("Collision_slide")
+onready var COLLISION_SHADOW_FORM = get_node("Collision_shadow_form")
 
 onready var TIMER_CLIMB = get_node("Player_stand/Timer_climb")
 onready var TIMER_SLIDE = get_node("Player_slide/Timer_slide")
@@ -61,6 +63,7 @@ export var speed_walk = 10
 export var speed_run = 30
 export var speed_crouch = 5
 export var speed_slide = 15
+export var speed_shadow_form = 20
 
 export var jump = 20
 var jump_stop = false
@@ -102,6 +105,10 @@ var object_or_ability = 1
 
 export var life_point = 100
 
+var is_shadow_form = false
+var is_shadow_form_end = false
+var shadow_form_list_collision = []
+
 ##########################################################################
 func _ready():
 #	INTERFACE_USER.visible = false
@@ -111,11 +118,12 @@ func _ready():
 	COLLISION_STAND.disabled = false
 	COLLISION_CROUCH.disabled = true
 	COLLISION_SLIDE.disabled = true
+	COLLISION_SHADOW_FORM.disabled = true
 	
-#	TIMER_CLIMB.wait_time = timer_climb_normal
-#	timer_climb_value_actual = timer_climb_normal_value
 	TIMER_CLIMB.wait_time = timer_climb_fast
 	timer_climb_value_actual = timer_climb_fast_value
+#	TIMER_CLIMB.wait_time = timer_climb_normal
+#	timer_climb_value_actual = timer_climb_normal_value
 	
 	TIMER_SLIDE.wait_time = timer_slide_normal
 #	TIMER_SLIDE.wait_time = timer_slide_long
@@ -166,12 +174,6 @@ func _input(event):
 		CAMERA_PIVOT.rotation.x = clamp(CAMERA_PIVOT.rotation.x, deg2rad(-80), deg2rad(80))
 		CAMERA_PIVOT.rotation.y = 0
 		CAMERA_PIVOT.rotation.z = 0
-	
-#	if event.is_pressed():
-#		if event.button_index == BUTTON_WHEEL_UP:
-#			input_mouse_wheel_up = true
-#		if event.button_index == BUTTON_WHEEL_DOWN:
-#			input_mouse_wheel_down = true
 
 ##########################################################################
 func process_movement(delta):
@@ -192,6 +194,8 @@ func process_movement(delta):
 		speed_actual = speed_run
 	if (is_crouch == true):
 		speed_actual = speed_crouch
+	if (is_shadow_form == true):
+		speed_actual = speed_shadow_form
 	
 	if (is_crouch == true and input_z == true and input_shift == true):
 		is_crouch = false
@@ -218,18 +222,22 @@ func process_movement(delta):
 			COLLISION_STAND.disabled = true
 			COLLISION_CROUCH.disabled = false
 			COLLISION_SLIDE.disabled = true
+			COLLISION_SHADOW_FORM.disabled = true
 			CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_CROUCH.global_transform.origin
 		elif (is_slide == true):
 			COLLISION_STAND.disabled = true
 			COLLISION_CROUCH.disabled = true
 			COLLISION_SLIDE.disabled = false
+			COLLISION_SHADOW_FORM.disabled = true
 			CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_SLIDE.global_transform.origin
 		else:
 			COLLISION_STAND.disabled = false
 			COLLISION_CROUCH.disabled = true
 			COLLISION_SLIDE.disabled = true
+			COLLISION_SHADOW_FORM.disabled = true
 			CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_STAND.global_transform.origin
 	
+	#climb
 	if (is_climb_up == false and is_climb_down == true):
 		if (input_z == true and input_space == true):
 			if (climb_timer == false):
@@ -241,8 +249,25 @@ func process_movement(delta):
 				COLLISION_STAND.disabled = true
 				COLLISION_CROUCH.disabled = true
 				COLLISION_SLIDE.disabled = true
+				COLLISION_SHADOW_FORM.disabled = true
 				climb_timer = true
 	
+	#shadow_form
+	if (is_shadow_form == true):
+		COLLISION_STAND.disabled = true
+		COLLISION_CROUCH.disabled = true
+		COLLISION_SLIDE.disabled = true
+		COLLISION_SHADOW_FORM.disabled = false
+		CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_SHADOW_FORM.global_transform.origin
+	if (is_shadow_form_end == true):
+		is_shadow_form_end = false
+		is_crouch = false
+		is_slide = false
+		for node in shadow_form_list_collision:
+			if (node.is_in_group("Npc") == false and node.is_in_group("Player") == false):
+				take_damage(1000, "damage")
+	
+	#slide
 	if (input_z == true and input_c_just == true and input_shift == true):
 		var slide_movement_x = direction.x
 		var slide_movement_y = gravity_vector.y
@@ -256,10 +281,6 @@ func process_movement(delta):
 		movement = climb_movement
 	elif (slide_timer == true):
 		movement = slide_movement
-	
-#	if (slide_timer == true and input_space_just == true):
-#		slide_timer = false
-#		TIMER_SLIDE.stop()
 
 ##########################################################################
 func _physics_process(delta):	
@@ -325,6 +346,7 @@ func _on_Timer_climb_timeout():
 	COLLISION_STAND.disabled = false
 	COLLISION_CROUCH.disabled = false
 	COLLISION_SLIDE.disabled = false
+	COLLISION_SHADOW_FORM.disabled = false
 	climb_timer = false
 
 ##########################################################################
@@ -399,3 +421,9 @@ func take_damage(damage, type):
 			life_point -= damage
 		if (life_point <= 0):
 			print("dead")
+
+##########################################################################
+func _on_Area_shadow_form_disabled_body_entered(body):
+	shadow_form_list_collision.append(body)
+func _on_Area_shadow_form_disabled_body_exited(body):
+	shadow_form_list_collision.erase(body)

@@ -22,6 +22,7 @@ surfaces/0 = {
 [node name="Cube_01" type="StaticBody"]
 
 [node name="Cube" type="MeshInstance" parent="."]
+use_in_baked_light = true
 mesh = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
