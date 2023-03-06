@@ -1,9 +1,11 @@
 extends KinematicBody
 
 onready var main_node = get_tree().root.get_node("Main")
+var player_node
 
 onready var NAVIGATION_AGENT = get_node("Navigation_follow")
 onready var TIMER_ATTACK = get_node("Timer_attack")
+onready var BLOOD_LINK = get_node("Blood_link")
 
 export var speed = 5
 
@@ -23,8 +25,13 @@ var can_attack_timer = true
 
 var is_hypnosis = false
 
+var is_blood_link = false
+var blood_link_list = []
+var blood_link_node
+
 func _ready():
 	NAVIGATION_AGENT.change_pathfinding(main_node.get_node("Player_actual"))
+	BLOOD_LINK.visible = false
 
 func _physics_process(delta):
 	direction = Vector3()
@@ -47,11 +54,25 @@ func _physics_process(delta):
 	reset()
 
 func take_damage(damage, type):
+	for node in blood_link_list:
+		if (is_instance_valid(node) == true):
+			if (node.get_instance_id() != self.get_instance_id()):
+				if (type == "damage"):
+					node.life_point -= damage
+				if (node.life_point <= 0):
+					blood_link_list.erase(node)
+					node.queue_free()
+				
+				if (type == "stun"):
+					node.stun_point -= damage
+				if (node.stun_point <= 0):
+					blood_link_list.erase(node)
+					print("stun")
+	
 	if (type == "damage"):
 		life_point -= damage
 		if (life_point <= 0):
 			queue_free()
-	
 	if (type == "stun"):
 		stun_point -= damage
 		if (stun_point <= 0):
@@ -78,6 +99,14 @@ func _on_Area_attack_zone_body_exited(body):
 	if (body.is_in_group("Player") == true):
 		is_player_in_area_attack_zone = false
 
+func _process(delta):
+	if (is_blood_link == true):
+		BLOOD_LINK.visible = true
+	else:
+		BLOOD_LINK.visible = false
+
 func reset():
-	pass
+	player_node = main_node.get_node("Player_actual")
+	blood_link_node = player_node.get_node("Ability").get_node("blood_link")
+	blood_link_list = player_node.get_node("Ability").get_node("blood_link").blood_link_list
 #	is_hypnosis = false

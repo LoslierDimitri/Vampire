@@ -11,6 +11,7 @@ onready var BLOOD_LANCE = load("res://Ability/Blood_lance.tscn")
 onready var VAMPIRE_VISION = load("res://Ability/Vampire_vision.tscn")
 onready var HYPNOSIS = load("res://Ability/Hypnosis.tscn")
 onready var SHADOW_FORM = load("res://Ability/Shadow_form.tscn")
+onready var BLOOD_LINK = load("res://Ability/Blood_link.tscn")
 
 var blood_lance_instance
 var blood_lance
@@ -27,6 +28,9 @@ var hypnosis
 var shadow_form_instance
 var shadow_form
 var shadow_form_active = false
+
+var blood_link_instance
+var blood_link
 
 func _ready():
 	blood_lance_instance = BLOOD_LANCE.instance()
@@ -52,6 +56,12 @@ func _ready():
 	shadow_form_instance.global_transform.origin = Vector3(0, -200, 0)
 	add_child(shadow_form_instance)
 	shadow_form = get_node("shadow_form")
+	
+	blood_link_instance = BLOOD_LINK.instance()
+	blood_link_instance.name = "blood_link"
+	blood_link_instance.global_transform.origin = Vector3(0, -200, 0)
+	add_child(blood_link_instance)
+	blood_link = get_node("blood_link")
 
 ##########################################################################
 func action(ability_name):
@@ -87,12 +97,12 @@ func action(ability_name):
 #		print("action shadow_form")
 		
 		if (shadow_form_active == false):
-#			shadow_form_active = true
 			shadow_form.shadow_form(true)
 		else:
-#			shadow_form_active = false
 			shadow_form.shadow_form(false)
 	
 	##########################################################################
 	if (ability_name == "Blood_link"):
-		print("action blood_link")
+#		print("action blood_link")
+		
+		blood_link.blood_link(RAYCAST)

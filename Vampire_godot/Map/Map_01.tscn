@@ -88,10 +88,13 @@ transform = Transform( 0.430947, 0, -0.507087, 0, 2, 0, 0.253544, 0, 0.861895, -
 transform = Transform( 11.3944, 0, 0, 0, 1.86218, 0, 0, 0, 1.86218, 40.177, 2.08782, -26.6484 )
 
 [node name="Cube_12" parent="NavigationMeshInstance" instance=ExtResource( 2 )]
-transform = Transform( 11.3944, 0, 0, 0, 1.86218, 0, 0, 0, 1.86218, 40.177, 2.08782, -32.1094 )
+transform = Transform( 5.67473, 0, 0, 0, 1.86218, 0, 0, 0, 1.86218, 34.216, 2.08782, -32.1094 )
 
 [node name="Cube_13" parent="NavigationMeshInstance" instance=ExtResource( 2 )]
-transform = Transform( 11.3944, 0, 0, 0, 1.86218, 0, 0, 0, 1.86218, 40.177, 4.69011, -29.5571 )
+transform = Transform( 11.3944, 0, 0, 0, 1.86218, 0, 0, 0, 6.00667, 41.1655, 4.69011, -29.5571 )
+
+[node name="Cube_14" parent="NavigationMeshInstance" instance=ExtResource( 2 )]
+transform = Transform( 5.67473, 0, 0, 0, 1.86218, 0, 0, 0, 1.86218, 47.6839, 2.08782, -32.1094 )
 
 [node name="Npc_foe" type="Spatial" parent="."]
 
@@ -106,5 +109,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.22377, 2.68622, 37.9469 )
 
 [node name="Npc_foe_04" parent="Npc_foe" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7696, 2.68622, 36.1911 )
+
+[node name="Npc_foe_05" parent="Npc_foe" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.03813, 2.68622, 51.4446 )
+
+[node name="Npc_foe_06" parent="Npc_foe" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.6253, 2.68622, -16.0915 )
 
 [node name="Npc_neutral" type="Spatial" parent="."]

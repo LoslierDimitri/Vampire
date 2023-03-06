@@ -33,5 +33,3 @@ func damage(raycast):
 		blood_lance_instance.global_transform.origin = collision_position
 		blood_lance_instance.look_at_from_position(collision_position, raycast.global_transform.origin - blood_lance_instance.global_transform.origin, Vector3.UP)
 		main_node.add_child(blood_lance_instance)
-	
-	
