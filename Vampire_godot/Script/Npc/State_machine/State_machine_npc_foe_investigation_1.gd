@@ -79,6 +79,8 @@ func calcul():
 		TIMER_SMALL_VISIBLE.stop()
 		TIMER_SMALL_NO_VISIBLE.stop()
 		state_node.change_state("neutral")
+		look_at_target = target_no
+		pathfinding_target = target_no
 	
 	set_data()
 
