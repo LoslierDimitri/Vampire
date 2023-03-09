@@ -65,7 +65,7 @@ func calcul():
 			is_player_visible = false
 			TIMER_SMALL_NO_VISIBLE.start()
 			TIMER_SMALL_VISIBLE.stop()
-			look_at_target = target_no
+			look_at_target = target_player
 			pathfinding_target = target_no
 	if (is_player_visible == true and is_timer_done == true):
 		is_timer_done = false

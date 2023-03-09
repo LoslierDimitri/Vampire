@@ -97,8 +97,9 @@ func calcul():
 func is_node_visible(node_list, type):
 	for node in node_list:
 		var space_state = get_world().direct_space_state
-		var vector = node.global_transform.origin - self.global_transform.origin
-		var result = space_state.intersect_ray(self.global_transform.origin, vector * 100)
+		var vector = node.global_transform.origin - parent_node.global_transform.origin
+#		var intersect_ray = vector.normalized() * 50
+		var result = space_state.intersect_ray(parent_node.global_transform.origin, node.global_transform.origin)
 		if (result):
 			if (result.collider == node):
 				if (type == "player"):
