@@ -111,8 +111,6 @@ var shadow_form_list_collision = []
 
 ##########################################################################
 func _ready():
-#	INTERFACE_USER.visible = false
-	
 	CAMERA_PIVOT.global_transform.origin = POSITION_CAMERA_STAND.global_transform.origin
 	
 	COLLISION_STAND.disabled = false
@@ -416,7 +414,6 @@ func change_object_or_ability():
 
 ##########################################################################
 func take_damage(damage, type):
-#	print(self.get_instance_id(), ": player take damage")
 		if (type == "damage"):
 			life_point -= damage
 		if (life_point <= 0):

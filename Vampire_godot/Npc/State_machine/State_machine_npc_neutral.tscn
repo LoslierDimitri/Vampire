@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Script/Npc/State_machine/State_machine_npc_neutral.gd" type="Script" id=1]
+
+[node name="State_machine_npc_neutral" type="Spatial"]
+script = ExtResource( 1 )

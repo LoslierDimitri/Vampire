@@ -27,6 +27,7 @@ margin_left = 673.0
 margin_top = 7.0
 margin_right = 1020.0
 margin_bottom = 424.0
+text = "LOG"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_left = 0.5

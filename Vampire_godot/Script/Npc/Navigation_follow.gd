@@ -7,7 +7,7 @@ onready var NAVIGATION_AGENT = get_node("NavigationAgent")
 var target_reachable = false
 export var target_reachable_distance = 5
 var target_close = false
-export var target_close_distance = 4
+export var target_close_distance = 5
 
 func pathfinding(target_pathfinding, delta):
 	if (target_pathfinding != null):
@@ -32,7 +32,7 @@ func pathfinding(target_pathfinding, delta):
 		get_parent().target_close = target_close
 		return velocity
 	else:
-		change_pathfinding(main_node.get_node("Player_actual"))
+#		change_pathfinding(main_node.get_node("Player_actual"))
 		return Vector3()
 
 func change_pathfinding(new_target):
