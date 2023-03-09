@@ -1,16 +1,6 @@
 extends Spatial
 
+onready var state_node = get_parent()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+onready var TIMER_SMALL = get_node("Timer_small_time")
+onready var TIMER_LONG = get_node("Timer_long_time")

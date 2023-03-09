@@ -42,6 +42,7 @@ var blood_link_node
 var player_list = []
 var dead_list = []
 var npc_list = []
+var sound_list = []
 
 ##########################################################################
 func _ready():
@@ -61,9 +62,14 @@ func _physics_process(delta):
 
 ##########################################################################
 func process_action():
-	var look_at_vector = target_pathfinding.global_transform.origin - direction
-	look_at_vector.y = global_transform.origin.y
-	look_at(look_at_vector, Vector3.UP)
+	if (target_pathfinding != null):
+		var look_at_vector = target_pathfinding.global_transform.origin - direction
+		look_at_vector.y = global_transform.origin.y
+		look_at(look_at_vector, Vector3.UP)
+	if (target_look_at != null):
+		var look_at_vector = target_look_at.global_transform.origin - direction
+		look_at_vector.y = global_transform.origin.y
+		look_at(look_at_vector, Vector3.UP)
 	
 	if (is_player_in_area_attack_zone == true and can_attack_timer == true):
 		attack(main_node.get_node("Player_actual"))
