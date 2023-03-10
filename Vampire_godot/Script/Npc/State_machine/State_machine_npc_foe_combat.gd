@@ -43,7 +43,7 @@ func calcul():
 		continu
 	si joueur non visible
 		lance timer
-		is_player_visible true
+		is_player_visible false
 	is joueur non visible et timer done
 		change state to investigation_2
 	"""

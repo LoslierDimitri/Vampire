@@ -98,7 +98,7 @@ func take_damage(damage, type):
 				if (node.life_point <= 0):
 					var dead_instance = DEAD.instance()
 					dead_instance.global_transform.origin = node.global_transform.origin
-					map_node.add_child(dead_instance)
+					map_node.get_node("Dead").add_child(dead_instance)
 					node.queue_free()
 				
 			if (type == "stun"):
@@ -114,7 +114,7 @@ func take_damage(damage, type):
 					player_node.get_node("Ability").can_teleport = false
 				var dead_instance = DEAD.instance()
 				dead_instance.global_transform.origin = self.global_transform.origin
-				map_node.add_child(dead_instance)
+				map_node.get_node("Dead").add_child(dead_instance)
 				queue_free()
 		if (type == "stun"):
 			stun_point -= damage

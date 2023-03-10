@@ -15,11 +15,17 @@ var is_timer_done = false
 var look_at_target
 var pathfinding_target
 
+var node_target_player
+var node_target_dead
+var node_target_npc
+
 func get_data():
 	player_list = state_node.player_list
 	dead_list = state_node.dead_list
 	npc_list = state_node.npc_list
 	sound_list = state_node.sound_list
+	
+#	node_target_dead = state_node.parent_node.target_dead
 
 func set_data():
 	if (look_at_target != null):
@@ -61,6 +67,17 @@ func calcul():
 		is_player_visible = false
 		TIMER_SMALL.stop()
 		state_node.change_state("investigation_1")
+	
+	"""
+	si dead visible
+		target_pathfinding = target_dead
+		target_look_at = target_dead
+	"""
+	if (state_node.is_node_visible(dead_list, "dead") == true):
+		is_timer_done = false
+		is_player_visible = false
+		TIMER_SMALL.stop()
+		state_node.change_state("investigation_area")
 	
 	set_data()
 

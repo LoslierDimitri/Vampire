@@ -30,13 +30,13 @@ func print_log():
 	text_to_print += "\nlife point: " + str(player_node.life_point)
 	
 	map_node = main_node.get_node("Map_actual")
-#	if (map_node.get_node("Npc_foe").get_child(0).get_node("State_machine_npc_foe") != null):
-#		var foe_state = map_node.get_node("Npc_foe").get_child(0).get_node("State_machine_npc_foe")
-#		text_to_print += "\nfoe state: " + str(foe_state)
-#		text_to_print += "\nfoe state: " + str(foe_state.state)
-#		text_to_print += "\nfoe state info: " + str(foe_state.text_to_print)
-#		text_to_print += "\nfoe state player_list: " + str(foe_state.player_list)
-#		text_to_print += "\nfoe state target_pathfinding: " + str(foe_state.target_pathfinding)
-#		text_to_print += "\nfoe state target_look_at: " + str(foe_state.target_look_at)
+	var foe_state = map_node.get_node("Npc_foe").get_child(0).get_node("State_machine_npc_foe")
+	text_to_print += "\nfoe state: " + str(foe_state)
+	text_to_print += "\nfoe state: " + str(foe_state.state)
+	text_to_print += "\nfoe state info: " + str(foe_state.text_to_print)
+	text_to_print += "\nfoe state player_list: " + str(foe_state.player_list)
+	text_to_print += "\nfoe state dead_list: " + str(foe_state.dead_list)
+	text_to_print += "\nfoe state target_pathfinding: " + str(foe_state.target_pathfinding)
+	text_to_print += "\nfoe state target_look_at: " + str(foe_state.target_look_at)
 	
 	LOG.text = text_to_print

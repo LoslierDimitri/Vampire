@@ -82,6 +82,18 @@ func calcul():
 		look_at_target = target_no
 		pathfinding_target = target_no
 	
+	"""
+	si dead visible
+		target_pathfinding = target_dead
+		target_look_at = target_dead
+	"""
+	if (state_node.is_node_visible(dead_list, "dead") == true):
+		is_timer_done = false
+		is_player_visible = false
+		TIMER_SMALL_NO_VISIBLE.stop()
+		TIMER_SMALL_VISIBLE.stop()
+		state_node.change_state("investigation_area")
+	
 	set_data()
 
 func _on_Timer_small_time_visible_timeout():
