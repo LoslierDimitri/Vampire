@@ -27,6 +27,7 @@ var target_look_at
 
 export var life_point = 100
 export var stun_point = 2
+var is_take_damage = false
 
 var is_player_in_area_attack_zone = false
 export var damage = 10
@@ -51,14 +52,14 @@ func _ready():
 
 ##########################################################################
 func _physics_process(delta):
-	reset()
-	
 	STATE_MACHINE.calcul()
 	direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
 	
 	process_action()
 	
 	movement()
+	
+	reset()
 
 ##########################################################################
 func process_action():
@@ -94,6 +95,7 @@ func take_damage(damage, type):
 	if (is_blood_link == true):
 		for node in blood_link_list:
 			if (type == "damage"):
+				is_take_damage = true
 				node.life_point -= damage
 				if (node.life_point <= 0):
 					var dead_instance = DEAD.instance()
@@ -107,6 +109,7 @@ func take_damage(damage, type):
 					print("stun")
 	else:
 		if (type == "damage"):
+			is_take_damage = true
 			life_point -= damage
 			if (life_point <= 0):
 				var blood_lance = get_node("blood_lance")
@@ -146,6 +149,8 @@ func _on_Area_attack_zone_body_exited(body):
 ##########################################################################
 func reset():
 	direction = Vector3()
+	
+	is_take_damage = false
 	
 	player_node = main_node.get_node("Player_actual")
 	blood_link_node = player_node.get_node("Ability").get_node("blood_link")

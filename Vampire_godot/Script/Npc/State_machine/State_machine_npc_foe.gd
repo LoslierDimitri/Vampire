@@ -96,6 +96,9 @@ func calcul():
 	if (state == "combat"):
 		COMBAT_STATE.calcul()
 	
+	if (parent_node.is_take_damage == true):
+		state = "combat"
+	
 	set_data()
 	
 	#a retirer
@@ -126,8 +129,9 @@ func is_node_visible(node_list, type):
 			var result = space_state.intersect_ray(parent_node.global_transform.origin, node.global_transform.origin)
 			if (result):
 				if (result.collider == node):
-					target_dead = node
-					return true
+					if (result.collider.global_transform.origin.distance_to(node.global_transform.origin) <= 20):
+						target_dead = node
+						return true
 			node.get_node("Collision").disabled = true
 	return false
 
