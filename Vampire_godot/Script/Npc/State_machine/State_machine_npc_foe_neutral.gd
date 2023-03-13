@@ -56,6 +56,9 @@ func calcul():
 	si npc non neutral
 		investigation_area
 	"""
+	look_at_target
+	pathfinding_target
+	
 	if (state_node.is_node_visible(player_list, "player") == true):
 		if (is_player_visible == false):
 			TIMER_SMALL.start()

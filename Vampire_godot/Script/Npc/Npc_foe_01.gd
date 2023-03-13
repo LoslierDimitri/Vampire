@@ -45,15 +45,40 @@ var dead_list = []
 var npc_list = []
 var sound_list = []
 
+export var pathfinding_neutral = "Pathfinding_00"
+var pathfinding_neutral_list = []
+var pathfinding_neutral_target
+var is_pathfinding_neutral_close = false
+var max_rage_pathfinding_neutral_close = 10
+var index = 0
+var index_max
+
 ##########################################################################
 func _ready():
 	NAVIGATION_AGENT.change_pathfinding(main_node.get_node("Player_actual"))
 	BLOOD_LINK.visible = false
+	
+	if (map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_child_count() > 0):
+		pathfinding_neutral_list = map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_children()
+		pathfinding_neutral_target = pathfinding_neutral_list[0]
+		index_max = pathfinding_neutral_list.size()
 
 ##########################################################################
-func _physics_process(delta):	
+func _physics_process(delta):
 	STATE_MACHINE.calcul()
-	direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
+	if (map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_child_count() > 0):
+		pathfinding_neutral_list = map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_children()
+	
+	if (STATE_MACHINE.state != "neutral"):
+		direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
+	if (STATE_MACHINE.state == "neutral" and pathfinding_neutral != "Pathfinding_00"):
+		target_pathfinding = pathfinding_neutral_target
+		if (pathfinding_neutral_target.global_transform.origin.distance_to(self.global_transform.origin) <= max_rage_pathfinding_neutral_close):
+			pathfinding_neutral_target = pathfinding_neutral_list[index]
+			index = index + 1
+			if (index == index_max):
+				index = 0
+		direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
 	
 	process_action()
 	
