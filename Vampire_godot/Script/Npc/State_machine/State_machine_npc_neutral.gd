@@ -103,6 +103,19 @@ func calcul():
 			state = "combat"
 		else:
 			state = "flee"
+			#flee node
+			"""
+			select a node randomly from pathfindinf_flee from parent_node
+			set pathfinding_target_node to path_flee_node
+			set look_at_target_node to path_flee_node
+			"""
+			var map_node_flee = parent_node.PATHFINDING_FLEE
+			var nb_map_node_flee = map_node_flee.get_child_count()
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			var index_pathfinding_node = rng.randf_range(0, nb_map_node_flee)
+			target_pathfinding = map_node_flee.get_child(index_pathfinding_node)
+			target_look_at = map_node_flee.get_child(index_pathfinding_node)
 	
 	set_data()
 

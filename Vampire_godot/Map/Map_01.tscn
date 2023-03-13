@@ -159,10 +159,6 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -36.946
 
 [node name="Npc_neutral" type="Spatial" parent="."]
 
-[node name="Npc_neutral_01" parent="Npc_neutral" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5131, 2.44563, -39.9715 )
-pathfinding_neutral = "Pathfinding_02"
-
 [node name="Npc_neutral_02" parent="Npc_neutral" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 51.5157, 2.44563, -73.2336 )
 npc_stame_machine_can_attack = true
@@ -170,6 +166,22 @@ npc_stame_machine_can_attack = true
 [node name="Npc_neutral_03" parent="Npc_neutral" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.863, 2.44563, -47.0587 )
 npc_stame_machine_can_attack = true
+
+[node name="Npc_neutral_01" parent="Npc_neutral" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5131, 2.44563, -39.9715 )
+pathfinding_neutral = "Pathfinding_02"
+
+[node name="Npc_neutral_04" parent="Npc_neutral" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9317, 2.44563, -104.457 )
+pathfinding_neutral = "Pathfinding_02"
+
+[node name="Npc_neutral_05" parent="Npc_neutral" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.3445, 2.44563, -80.6528 )
+pathfinding_neutral = "Pathfinding_02"
+
+[node name="Npc_neutral_06" parent="Npc_neutral" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99398, 2.44563, -75.6862 )
+pathfinding_neutral = "Pathfinding_02"
 
 [node name="Dead" type="Spatial" parent="."]
 
@@ -204,3 +216,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.1063, 0, -50.4534 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8371, 0, -48.44 )
 
 [node name="Pathfinding_03" type="Spatial" parent="Pathfinding_neutral"]
+
+[node name="Pathfinding_flee" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="Pathfinding_flee"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6216, 0, -142.257 )
+
+[node name="Position3D2" type="Position3D" parent="Pathfinding_flee"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -78.4431, 0, -72.7839 )
