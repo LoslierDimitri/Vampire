@@ -31,6 +31,8 @@ script = ExtResource( 1 )
 [node name="Position_player_spawn" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.98222, 8.92944, -10.2945 )
 
+[node name="Player_last_position" type="Position3D" parent="."]
+
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="."]
 navmesh = SubResource( 3 )
 

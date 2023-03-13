@@ -4,6 +4,7 @@ extends Spatial
 onready var main_node = get_tree().root.get_node("Main")
 onready var map_node = main_node.get_node("Map_actual")
 onready var player_node = main_node.get_node("Player_actual")
+onready var player_node_last_position = map_node.get_node("Player_last_position")
 onready var parent_node = get_parent()
 
 onready var NEUTRAL_STATE = get_node("Neutral")
@@ -60,6 +61,7 @@ var target_look_at
 var target_player
 var target_dead
 var target_npc
+var target_player_last_position
 
 ##########################################################################
 func change_state(new_state):
@@ -67,6 +69,8 @@ func change_state(new_state):
 
 func get_data():
 	player_node = main_node.get_node("Player_actual")
+	player_node_last_position = map_node.player_node_last_position
+#	player_node = map_node.player_node_last_position
 	
 	player_list = parent_node.player_list
 	dead_list = parent_node.dead_list
@@ -114,7 +118,8 @@ func is_node_visible(node_list, type):
 		if (result):
 			if (result.collider == node):
 				if (type == "player"):
-					target_player = node
+					map_node.update_player_last_position()
+					target_player = map_node.player_node_last_position
 #				if (type == "dead"):
 #					target_dead = node
 				if (type == "npc"):

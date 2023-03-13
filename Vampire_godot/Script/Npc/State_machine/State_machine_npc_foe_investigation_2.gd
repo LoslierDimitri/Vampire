@@ -17,6 +17,7 @@ var look_at_target
 var pathfinding_target
 
 var target_player
+var target_player_last_position
 var target_no
 
 func get_data():
@@ -26,6 +27,7 @@ func get_data():
 	sound_list = state_node.sound_list
 	
 	target_player = state_node.player_node
+	target_player_last_position = state_node.player_node_last_position
 	target_no = state_node.parent_node
 
 func set_data():
@@ -60,14 +62,14 @@ func calcul():
 			is_player_visible = true
 			TIMER_SMALL_VISIBLE.start()
 			TIMER_SMALL_NO_VISIBLE.stop()
-			look_at_target = target_player
+			look_at_target = target_player_last_position
 			pathfinding_target = target_player
 	if (state_node.is_node_visible(player_list, "player") == false):
 		if (is_player_visible == true):
 			is_player_visible = false
 			TIMER_SMALL_NO_VISIBLE.start()
 			TIMER_SMALL_VISIBLE.stop()
-			look_at_target = target_player
+			look_at_target = target_player_last_position
 			pathfinding_target = target_player
 	if (is_player_visible == true and is_timer_done == true):
 		is_timer_done = false
@@ -82,8 +84,8 @@ func calcul():
 		TIMER_SMALL_NO_VISIBLE.stop()
 		state_node.change_state("investigation_1")
 		state_node.INVESTIGATION_1_STATE.TIMER_SMALL_NO_VISIBLE.start()
-		look_at_target = target_no
-		pathfinding_target = target_no
+		look_at_target = target_player_last_position
+		pathfinding_target = target_player_last_position
 	
 	"""
 	si dead visible

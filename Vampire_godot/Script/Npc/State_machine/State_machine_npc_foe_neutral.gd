@@ -13,6 +13,7 @@ var is_player_visible = false
 var is_timer_done = false
 
 var look_at_target
+var target_player_last_position
 var pathfinding_target
 
 var node_target_player

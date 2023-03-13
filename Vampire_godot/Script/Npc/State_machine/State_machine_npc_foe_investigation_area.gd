@@ -17,6 +17,7 @@ var pathfinding_target
 var look_at_target
 
 var target_player
+var target_player_last_position
 var target_no
 
 var node_target_player
@@ -30,6 +31,7 @@ func get_data():
 	sound_list = state_node.sound_list
 	
 	target_player = state_node.player_node
+	target_player_last_position = state_node.player_node_last_position
 	target_no = state_node.parent_node
 	
 	node_target_dead = state_node.target_dead
