@@ -5,7 +5,7 @@
 [sub_resource type="CubeMesh" id=2]
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.882353, 0.133333, 0.133333, 1 )
+albedo_color = Color( 0.278431, 0.882353, 0.133333, 1 )
 
 [sub_resource type="BoxShape" id=1]
 

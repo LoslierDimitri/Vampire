@@ -35,5 +35,9 @@ func pathfinding(target_pathfinding, delta):
 #		change_pathfinding(main_node.get_node("Player_actual"))
 		return Vector3()
 
+func get_distance(destination):
+	NAVIGATION_AGENT.set_target_location(destination.global_transform.origin)
+	return NAVIGATION_AGENT.distance_to_target()
+
 func change_pathfinding(new_target):
 	get_parent().target_pathfinding = new_target

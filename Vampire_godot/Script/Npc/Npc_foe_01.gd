@@ -51,7 +51,7 @@ func _ready():
 	BLOOD_LINK.visible = false
 
 ##########################################################################
-func _physics_process(delta):
+func _physics_process(delta):	
 	STATE_MACHINE.calcul()
 	direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
 	
@@ -98,7 +98,7 @@ func take_damage(damage, type):
 				is_take_damage = true
 				node.life_point -= damage
 				if (node.life_point <= 0):
-					var dead_instance = DEAD.instance()
+					var dead_instance = node.DEAD.instance()
 					dead_instance.global_transform.origin = node.global_transform.origin
 					map_node.get_node("Dead").add_child(dead_instance)
 					node.queue_free()
