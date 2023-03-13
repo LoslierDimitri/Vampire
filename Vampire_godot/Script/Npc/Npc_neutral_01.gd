@@ -9,6 +9,7 @@ onready var NAVIGATION_AGENT = get_node("Navigation_follow")
 onready var STATE_MACHINE = get_node("State_machine_npc_neutral")
 onready var BLOOD_LINK = get_node("Blood_link")
 onready var DEAD = load("res://Npc/Npc_neutral/Npc_neutral_01_dead.tscn")
+onready var PATHFINDING_FLEE = map_node.get_node("Pathfinding_flee")
 
 ##########################################################################
 var direction = Vector3()
