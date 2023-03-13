@@ -14,7 +14,7 @@ onready var DEAD = load("res://Npc/Npc_foe/Npc_foe_01_dead.tscn")
 ##########################################################################
 var direction = Vector3()
 
-export var wpeed_walk = 5
+export var speed_walk = 5
 export var speed_run = 10
 export var speed_stop = 0
 var speed_actual = 5
@@ -49,7 +49,7 @@ export var pathfinding_neutral = "Pathfinding_00"
 var pathfinding_neutral_list = []
 var pathfinding_neutral_target
 var is_pathfinding_neutral_close = false
-var max_rage_pathfinding_neutral_close = 10
+var max_rage_pathfinding_neutral_close = 5
 var index = 0
 var index_max
 
@@ -107,13 +107,17 @@ func process_action():
 
 ##########################################################################
 func movement():
+	direction = direction.normalized()
 	if (is_hypnosis == true):
 		speed_actual = speed_stop
+	else:
+		speed_actual = speed_walk
 	
 	direction = direction * speed_actual
 	if (direction != null):
 		if (target_reachable == true and target_close == false):
-			move_and_collide(direction)
+#			move_and_collide(direction)
+			move_and_slide(direction, Vector3.UP)
 
 ##########################################################################
 func take_damage(damage, type):

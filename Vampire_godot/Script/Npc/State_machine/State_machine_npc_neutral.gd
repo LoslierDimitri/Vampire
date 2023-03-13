@@ -62,6 +62,8 @@ var target_dead
 var target_npc
 var target_player_last_position
 
+export var max_range_target_dead = 50
+
 ##########################################################################
 func change_state(new_state):
 	state = new_state
@@ -97,7 +99,10 @@ func calcul():
 		FLEE_STATE.calcul()
 	
 	if (parent_node.is_take_damage == true):
-		state = "combat"
+		if (parent_node.npc_stame_machine_can_attack == true):
+			state = "combat"
+		else:
+			state = "flee"
 	
 	set_data()
 
@@ -125,10 +130,12 @@ func is_node_visible(node_list, type):
 			var space_state = get_world().direct_space_state
 			var vector = node.global_transform.origin - parent_node.global_transform.origin
 			var result = space_state.intersect_ray(parent_node.global_transform.origin, node.global_transform.origin)
+			node.get_node("Collision").disabled = true
 			if (result):
 				if (result.collider == node):
-					if (result.collider.global_transform.origin.distance_to(node.global_transform.origin) <= 20):
+					if (parent_node.NAVIGATION_AGENT.get_distance(node) <= max_range_target_dead):
+#					if (result.collider.global_transform.origin.distance_to(node.global_transform.origin) <= 20):
 						target_dead = node
 						return true
-			node.get_node("Collision").disabled = true
+#			node.get_node("Collision").disabled = true
 	return false

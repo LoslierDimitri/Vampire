@@ -13,7 +13,7 @@ onready var DEAD = load("res://Npc/Npc_neutral/Npc_neutral_01_dead.tscn")
 ##########################################################################
 var direction = Vector3()
 
-export var wpeed_walk = 5
+export var speed_walk = 5
 export var speed_run = 10
 export var speed_stop = 0
 var speed_actual = 5
@@ -44,14 +44,39 @@ var dead_list = []
 var npc_list = []
 var sound_list = []
 
+export var pathfinding_neutral = "Pathfinding_00"
+var pathfinding_neutral_list = []
+var pathfinding_neutral_target
+var is_pathfinding_neutral_close = false
+var max_rage_pathfinding_neutral_close = 5
+var index = 0
+var index_max
+
+export var npc_stame_machine_can_attack = false
+
 ##########################################################################
 func _ready():
-	pass
+	if (map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_child_count() > 0):
+		pathfinding_neutral_list = map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_children()
+		pathfinding_neutral_target = pathfinding_neutral_list[0]
+		index_max = pathfinding_neutral_list.size()
 
 ##########################################################################
 func _physics_process(delta):
 	STATE_MACHINE.calcul()
-	direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
+	if (map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_child_count() > 0):
+		pathfinding_neutral_list = map_node.get_node("Pathfinding_neutral").get_node(pathfinding_neutral).get_children()
+	
+	if (STATE_MACHINE.state != "neutral"):
+		direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
+	if (STATE_MACHINE.state == "neutral" and pathfinding_neutral != "Pathfinding_00"):
+		target_pathfinding = pathfinding_neutral_target
+		if (pathfinding_neutral_target.global_transform.origin.distance_to(self.global_transform.origin) <= max_rage_pathfinding_neutral_close):
+			pathfinding_neutral_target = pathfinding_neutral_list[index]
+			index = index + 1
+			if (index == index_max):
+				index = 0
+		direction = NAVIGATION_AGENT.pathfinding(target_pathfinding, delta)
 	
 	process_action()
 	
@@ -77,13 +102,17 @@ func process_action():
 
 ##########################################################################
 func movement():
+	direction = direction.normalized()
 	if (is_hypnosis == true):
 		speed_actual = speed_stop
+	else:
+		speed_actual = speed_walk
 	
 	direction = direction * speed_actual
 	if (direction != null):
 		if (target_reachable == true and target_close == false):
-			move_and_collide(direction)
+#			move_and_collide(direction)
+			move_and_slide(direction, Vector3.UP)
 
 ##########################################################################
 func reset():
@@ -97,7 +126,37 @@ func reset():
 
 ##########################################################################
 func take_damage(damage, type):
-	pass
+	if (is_blood_link == true):
+		for node in blood_link_list:
+			if (type == "damage"):
+				is_take_damage = true
+				node.life_point -= damage
+				if (node.life_point <= 0):
+					var dead_instance = node.DEAD.instance()
+					dead_instance.global_transform.origin = node.global_transform.origin
+					map_node.get_node("Dead").add_child(dead_instance)
+					node.queue_free()
+				
+			if (type == "stun"):
+				node.stun_point -= damage
+				if (node.stun_point <= 0):
+					print("stun")
+	else:
+		if (type == "damage"):
+			is_take_damage = true
+			life_point -= damage
+			if (life_point <= 0):
+				var blood_lance = get_node("blood_lance")
+				if (blood_lance != null):
+					player_node.get_node("Ability").can_teleport = false
+				var dead_instance = DEAD.instance()
+				dead_instance.global_transform.origin = self.global_transform.origin
+				map_node.get_node("Dead").add_child(dead_instance)
+				queue_free()
+		if (type == "stun"):
+			stun_point -= damage
+			if (stun_point <= 0):
+				print("stun")
 
 ##########################################################################
 func take_hypnose():
