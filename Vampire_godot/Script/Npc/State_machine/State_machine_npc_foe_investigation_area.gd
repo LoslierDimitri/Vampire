@@ -35,6 +35,7 @@ func get_data():
 	target_no = state_node.parent_node
 	
 	node_target_dead = state_node.target_dead
+	node_target_npc = state_node.target_npc
 
 func set_data():
 	if (look_at_target != null):
@@ -57,6 +58,15 @@ func calcul():
 		look_at_target = node_target_dead
 		pathfinding_target = node_target_dead
 		TIMER_LONG_NO_VISIBLE.start()
+	
+	"""
+	si npc non neutral visible
+		target_pathfinding = target_npc
+		target_look_at = target_npc
+	"""
+	if (state_node.is_node_visible(npc_list, "npc") == true):
+		look_at_target = node_target_npc
+		pathfinding_target = node_target_npc
 	
 	"""
 	si player visible apres court temps
@@ -96,6 +106,20 @@ func calcul():
 #		TIMER_SMALL_VISIBLE.stop()
 #		state_node.NEUTRAL.TIMER_SMALL.start()
 #		state_node.change_state("neutral")
+	
+	"""
+	si npc non neutral visible
+		target_pathfinding = target_npc
+		target_look_at = target_npc
+	"""
+#	if (state_node.is_node_visible(npc_list, "npc") == true):
+#		is_player_visible = false
+#		is_timer_done = false
+#		TIMER_LONG_NO_VISIBLE.stop()
+#		TIMER_SMALL_VISIBLE.stop()
+#		look_at_target = node_target_npc
+#		pathfinding_target = node_target_npc
+#		state_node.change_state("investigation_area")
 	
 	set_data()
 

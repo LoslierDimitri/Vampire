@@ -183,6 +183,9 @@ pathfinding_neutral = "Pathfinding_02"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99398, 2.44563, -75.6862 )
 pathfinding_neutral = "Pathfinding_02"
 
+[node name="Npc_neutral_07" parent="Npc_neutral" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2805, 2.44561, -89.2459 )
+
 [node name="Dead" type="Spatial" parent="."]
 
 [node name="Pathfinding_neutral" type="Spatial" parent="."]

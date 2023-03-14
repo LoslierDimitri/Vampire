@@ -122,10 +122,10 @@ func is_node_visible(node_list, type):
 				if (type == "player"):
 					map_node.update_player_last_position()
 					target_player = map_node.player_node_last_position
-#				if (type == "dead"):
-#					target_dead = node
 				if (type == "npc"):
-					target_npc = node
+					if (node.get_state_machine().state != "neutral"):
+						target_npc = node
+#					target_npc = node
 				return true
 	
 	if (type == "dead"):

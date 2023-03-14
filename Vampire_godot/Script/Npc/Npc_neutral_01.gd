@@ -180,3 +180,6 @@ func _on_Area_detection_body_exited(body):
 		dead_list.erase(body)
 	if (body.is_in_group("Npc")):
 		npc_list.erase(body)
+
+func get_state_machine():
+	return STATE_MACHINE

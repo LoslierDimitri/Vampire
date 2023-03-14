@@ -36,6 +36,8 @@ func print_log():
 	text_to_print += "\nfoe state info: " + str(foe_state.text_to_print)
 	text_to_print += "\nfoe state player_list: " + str(foe_state.player_list)
 	text_to_print += "\nfoe state dead_list: " + str(foe_state.dead_list)
+	text_to_print += "\nfoe state npc_list: " + str(foe_state.npc_list)
+	text_to_print += "\nfoe state npc_list target: " + str(foe_state.target_npc)
 	text_to_print += "\nfoe state target_pathfinding: " + str(foe_state.target_pathfinding)
 	text_to_print += "\nfoe state target_look_at: " + str(foe_state.target_look_at)
 	

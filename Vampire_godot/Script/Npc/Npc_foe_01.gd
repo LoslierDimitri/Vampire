@@ -191,12 +191,15 @@ func _on_Area_detection_body_entered(body):
 		player_list.append(body)
 	if (body.is_in_group("Dead")):
 		dead_list.append(body)
-	if (body.is_in_group("Npc")):
+	if (body.is_in_group("Npc") and body != self):
 		npc_list.append(body)
 func _on_Area_detection_body_exited(body):
 	if (body.is_in_group("Player")):
 		player_list.erase(body)
 	if (body.is_in_group("Dead")):
 		dead_list.erase(body)
-	if (body.is_in_group("Npc")):
+	if (body.is_in_group("Npc") and body != self):
 		npc_list.erase(body)
+
+func get_state_machine():
+	return STATE_MACHINE

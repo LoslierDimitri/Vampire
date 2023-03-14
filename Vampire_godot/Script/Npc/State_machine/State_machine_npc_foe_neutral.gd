@@ -26,6 +26,8 @@ func get_data():
 	npc_list = state_node.npc_list
 	sound_list = state_node.sound_list
 	
+	node_target_npc = state_node.target_npc
+	
 #	node_target_dead = state_node.parent_node.target_dead
 
 func set_data():
@@ -56,8 +58,6 @@ func calcul():
 	si npc non neutral
 		investigation_area
 	"""
-	look_at_target
-	pathfinding_target
 	
 	if (state_node.is_node_visible(player_list, "player") == true):
 		if (is_player_visible == false):
@@ -81,6 +81,19 @@ func calcul():
 		is_timer_done = false
 		is_player_visible = false
 		TIMER_SMALL.stop()
+		state_node.change_state("investigation_area")
+	
+	"""
+	si npc non neutral visible
+		target_pathfinding = target_npc
+		target_look_at = target_npc
+	"""
+	if (state_node.is_node_visible(npc_list, "npc") == true):
+		is_timer_done = false
+		is_player_visible = false
+		TIMER_SMALL.stop()
+		look_at_target = node_target_npc
+		pathfinding_target = node_target_npc
 		state_node.change_state("investigation_area")
 	
 	set_data()
